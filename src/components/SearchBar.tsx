@@ -5,7 +5,7 @@ const SearchBar = () => {
         How's the sky looking today?
       </h1>
 
-      <div className="mt-12 flex w-full max-w-xl gap-4">
+      <div className="mt-12 flex w-full max-w-xl gap-3">
         {/* search bar */}
         <div className="relative w-full">
           <input
