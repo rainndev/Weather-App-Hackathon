@@ -1,6 +1,6 @@
 import Navigation from "./components/Navigation";
 import SearchBar from "./components/SearchBar";
-import WeatherDataContainer from "./components/WeatherDataContainer";
+import WeatherDataMain from "./components/WeatherData/WeatherDataMain";
 
 const App = () => {
   return (
@@ -8,7 +8,7 @@ const App = () => {
       <div className="flex h-full w-7xl flex-col items-center justify-center">
         <Navigation />
         <SearchBar />
-        <WeatherDataContainer />
+        <WeatherDataMain />
       </div>
     </div>
   );
