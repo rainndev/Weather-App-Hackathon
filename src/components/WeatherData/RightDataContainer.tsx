@@ -5,7 +5,7 @@ const RightDataContainer = () => {
     <div className="bg-WEATHER-neutral-800 min-h-full w-[30%] rounded-2xl p-5">
       {/* header options */}
       <div className="flex justify-between">
-        <p className="font-semibold">Hourly forecast</p>
+        <p className="text-md font-medium">Hourly forecast</p>
         <div className="bg-WEATHER-neutral-600 text-WEATHER-neutral-200 rounded-md px-5 py-1 text-sm">
           Tuesday
         </div>
