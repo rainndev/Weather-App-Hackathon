@@ -1,3 +1,5 @@
+import { DropdownHourlyForecast } from "./DropdownHourlyForecast";
+
 const sampleData = [...Array(8)];
 
 const RightDataContainer = () => {
@@ -6,7 +8,9 @@ const RightDataContainer = () => {
       {/* header options */}
       <div className="flex justify-between">
         <p className="text-md font-medium">Hourly forecast</p>
-        <div className="bg-WEATHER-neutral-600 text-WEATHER-neutral-200 flex items-center rounded-lg px-5 py-1.5 text-sm">
+        <DropdownHourlyForecast />
+
+        {/* <div className="bg-WEATHER-neutral-600 text-WEATHER-neutral-200 flex items-center rounded-lg px-5 py-1.5 text-sm">
           <p>Tuesday</p>
           <span className="ml-3">
             <img
@@ -15,7 +19,7 @@ const RightDataContainer = () => {
               alt=""
             />
           </span>
-        </div>
+        </div> */}
       </div>
 
       {/* hourly data  */}
