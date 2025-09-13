@@ -13,9 +13,15 @@ import {
 
 import week from "@/data/week.json";
 
-export function DropdownHourlyForecast() {
-  const [position, setPosition] = React.useState(week[0]);
+interface DropdownHourlyForecastProps {
+  day: string;
+  setDay: (value: string) => void;
+}
 
+export function DropdownHourlyForecast({
+  day,
+  setDay,
+}: DropdownHourlyForecastProps) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -23,15 +29,15 @@ export function DropdownHourlyForecast() {
           className="bg-WEATHER-neutral-600 hover:bg-WEATHER-neutral-600 text-WEATHER-neutral-200 hover:text-WEATHER-neutral-300 border-WEATHER-neutral-600"
           variant="outline"
         >
-          {position}
+          {day}
           <img src="/public/images/icon-dropdown.svg" className="size-3" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="bg-WEATHER-neutral-600 text-WEATHER-neutral-0 border-WEATHER-neutral-600 w-fit border">
-        <DropdownMenuRadioGroup value={position} onValueChange={setPosition}>
-          {week.map((day) => (
-            <DropdownMenuRadioItem className="p-2 px-4" value={day}>
-              {day}
+        <DropdownMenuRadioGroup value={day} onValueChange={setDay}>
+          {week.map((dayItem) => (
+            <DropdownMenuRadioItem className="p-2 px-4" value={dayItem}>
+              {dayItem}
             </DropdownMenuRadioItem>
           ))}
         </DropdownMenuRadioGroup>

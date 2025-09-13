@@ -1,14 +1,17 @@
+import { useState } from "react";
 import { DropdownHourlyForecast } from "./DropdownHourlyForecast";
 
 const sampleData = [...Array(8)];
 
 const RightDataContainer = () => {
+  const [day, setDay] = useState("Sunday");
+
   return (
     <div className="bg-WEATHER-neutral-800 min-h-full w-[34%] rounded-2xl p-5">
       {/* header options */}
       <div className="flex justify-between">
         <p className="text-md font-medium">Hourly forecast</p>
-        <DropdownHourlyForecast />
+        <DropdownHourlyForecast day={day} setDay={setDay} />
 
         {/* <div className="bg-WEATHER-neutral-600 text-WEATHER-neutral-200 flex items-center rounded-lg px-5 py-1.5 text-sm">
           <p>Tuesday</p>
