@@ -1,6 +1,6 @@
-import type { WeatherApiResponse } from "../types/weather.types";
-import { formatDate, getDayOfWeek } from "../utils/date";
-import { getWeatherIcon } from "../utils/weatherIcon";
+import type { WeatherApiResponse } from "../../types/weather.types";
+import { formatDate, getDayOfWeek } from "../../utils/date";
+import { getWeatherIcon } from "../../utils/weatherIcon";
 
 const sampleData = [...Array(4)];
 

@@ -1,4 +1,4 @@
-import type { WeatherApiResponse } from "@/components/types/weather.types";
+import type { WeatherApiResponse } from "@/types/weather.types";
 import axios from "axios";
 
 const API_BASE_URL = "https://api.open-meteo.com/v1/forecast";
