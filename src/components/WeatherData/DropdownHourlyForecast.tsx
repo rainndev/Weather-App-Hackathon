@@ -11,15 +11,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-const week = [
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
-];
+import week from "@/data/week.json";
 
 export function DropdownHourlyForecast() {
   const [position, setPosition] = React.useState(week[0]);
