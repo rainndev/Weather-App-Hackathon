@@ -1,5 +1,5 @@
 import type { WeatherApiResponse } from "../types/weather.types";
-import { getDayOfWeek } from "../utils/date";
+import { formatDate, getDayOfWeek } from "../utils/date";
 import { getWeatherIcon } from "../utils/weatherIcon";
 
 const sampleData = [...Array(4)];
@@ -9,6 +9,9 @@ interface LeftDataContainerProps {
 }
 
 const LeftDataContainer = ({ data }: LeftDataContainerProps) => {
+  const currentTemp = +(data?.current?.temperature_2m ?? 0);
+  const currentDate = data?.current?.time;
+
   return (
     <div className="flex-1 flex-col">
       {/* banner today summary weather */}
@@ -23,18 +26,20 @@ const LeftDataContainer = ({ data }: LeftDataContainerProps) => {
           <div>
             <h2 className="text-2xl font-semibold">Berlin, Germany</h2>
             <p className="text-WEATHER-neutral-200 text-md mt-1">
-              Tuesday, Aug 5, 2025
+              {formatDate(String(currentDate))}
             </p>
           </div>
 
           <div className="flex items-center gap-5">
             <img
-              src="/public/images/icon-sunny.webp"
+              src={getWeatherIcon(currentTemp, "celsius")}
               alt="icon weather"
               className="size-25"
             />
 
-            <h1 className="text-8xl font-semibold italic">68°</h1>
+            <h1 className="text-8xl font-semibold italic">
+              {data?.current.temperature_2m}°
+            </h1>
           </div>
         </div>
       </div>
@@ -46,7 +51,7 @@ const LeftDataContainer = ({ data }: LeftDataContainerProps) => {
             className="bg-WEATHER-neutral-800 flex w-full flex-col rounded-xl p-5"
           >
             <p className="text-WEATHER-neutral-200">Feels Like</p>
-            <h1 className="mt-3 text-3xl">64°</h1>
+            <h1 className="mt-3 text-3xl">{data?.current.temperature_2m}°</h1>
           </div>
         ))}
       </div>

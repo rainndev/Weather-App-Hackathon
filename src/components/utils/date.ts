@@ -11,3 +11,22 @@ export const getDayOfWeek = (dateString: string) => {
   // The locale 'en-US' is used to ensure the output is in English.
   return new Intl.DateTimeFormat("en-US", options).format(date);
 };
+
+/**
+ * Converts an ISO 8601 formatted datetime string to a human-readable date string.
+ *
+ * @param {string} isoString The ISO 8601 string (e.g., "2025-09-13T14:30").
+ * @returns {string} The formatted date string (e.g., "Tuesday, Aug 5, 2025").
+ */
+export const formatDate = (isoString: string) => {
+  const date = new Date(isoString);
+
+  const options: Intl.DateTimeFormatOptions = {
+    weekday: "long",
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  };
+
+  return date.toLocaleDateString("en-US", options);
+};
