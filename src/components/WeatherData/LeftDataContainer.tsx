@@ -1,7 +1,14 @@
-const sampleData = [...Array(4)];
-const sampleData2 = [...Array(7)];
+import type { WeatherApiResponse } from "../types/weather.types";
+import { getDayOfWeek } from "../utils/date";
+import { getWeatherIcon } from "../utils/weatherIcon";
 
-const LeftDataContainer = () => {
+const sampleData = [...Array(4)];
+
+interface LeftDataContainerProps {
+  data: WeatherApiResponse | undefined;
+}
+
+const LeftDataContainer = ({ data }: LeftDataContainerProps) => {
   return (
     <div className="flex-1 flex-col">
       {/* banner today summary weather */}
@@ -33,8 +40,11 @@ const LeftDataContainer = () => {
       </div>
 
       <div className="mt-5 flex w-full gap-5">
-        {sampleData.map((_) => (
-          <div className="bg-WEATHER-neutral-800 flex w-full flex-col rounded-xl p-5">
+        {sampleData.map((_, i) => (
+          <div
+            key={i}
+            className="bg-WEATHER-neutral-800 flex w-full flex-col rounded-xl p-5"
+          >
             <p className="text-WEATHER-neutral-200">Feels Like</p>
             <h1 className="mt-3 text-3xl">64°</h1>
           </div>
@@ -46,20 +56,28 @@ const LeftDataContainer = () => {
         <h1 className="text-md font-medium">Daily forecast</h1>
 
         <div className="mt-4 flex gap-3">
-          {sampleData2.map((_) => (
-            <div className="bg-WEATHER-neutral-800 flex w-full flex-col items-center rounded-xl p-3">
-              <p className="text-WEATHER-neutral-200">Tue</p>
-              <img
-                src="/public/images/icon-rain.webp"
-                className="my-5 size-15"
-                alt=""
-              />
-              <div className="flex w-full justify-between">
-                <p>68°</p>
-                <p>59°</p>
+          {data?.daily.time.map((date, i) => {
+            const minTemp = data?.daily.temperature_2m_min[i].toFixed(0);
+            const maxTemp = data?.daily.temperature_2m_max[i].toFixed(0);
+
+            return (
+              <div
+                key={i}
+                className="bg-WEATHER-neutral-800 flex w-full flex-col items-center rounded-xl p-3"
+              >
+                <p className="text-WEATHER-neutral-200">{getDayOfWeek(date)}</p>
+                <img
+                  src={getWeatherIcon(+maxTemp, "fahrenheit")}
+                  className="my-5 size-15"
+                  alt=""
+                />
+                <div className="flex w-full justify-between">
+                  <p>{minTemp}°</p>
+                  <p>{maxTemp}°</p>
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </div>

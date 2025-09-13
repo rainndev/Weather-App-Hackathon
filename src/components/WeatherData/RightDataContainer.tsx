@@ -27,8 +27,11 @@ const RightDataContainer = () => {
 
       {/* hourly data  */}
       <div className="mt-4 space-y-3">
-        {sampleData.map((_) => (
-          <div className="bg-WEATHER-neutral-700 border-WEATHER-neutral-600 flex w-full items-center justify-between rounded-lg border p-2.5">
+        {sampleData.map((_, i) => (
+          <div
+            key={i}
+            className="bg-WEATHER-neutral-700 border-WEATHER-neutral-600 flex w-full items-center justify-between rounded-lg border p-2.5"
+          >
             <div className="flex items-center gap-2">
               <img
                 src="/public/images/icon-overcast.webp"

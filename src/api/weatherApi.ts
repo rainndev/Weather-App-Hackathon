@@ -1,14 +1,15 @@
+import type { WeatherApiResponse } from "@/components/types/weather.types";
 import axios from "axios";
 
 const API_BASE_URL = "https://api.open-meteo.com/v1/forecast";
 
-type temperatureType = "fahrenheit" | "celsius";
+export type temperatureType = "fahrenheit" | "celsius";
 
 export const fetchWeather = async (
   latitude: string,
   longitude: string,
   temperature_unit: temperatureType,
-) => {
+): Promise<WeatherApiResponse> => {
   try {
     const response = await axios.get(API_BASE_URL, {
       params: {

@@ -14,7 +14,7 @@ const WeatherDataMain = () => {
     staleTime: 300000, //5 mins
   });
 
-  console.log("data response", data);
+  console.log("data response", data?.daily);
 
   return (
     <div className="text-WEATHER-neutral-0 mt-10 flex h-full w-full gap-5">
@@ -22,7 +22,7 @@ const WeatherDataMain = () => {
         <p>Loading...</p>
       ) : (
         <>
-          <LeftDataContainer />
+          <LeftDataContainer data={data} />
           <RightDataContainer />
         </>
       )}
