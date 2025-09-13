@@ -32,7 +32,7 @@ const LeftDataContainer = () => {
         </div>
       </div>
 
-      <div className="bg-WEATHER-blue-700/10 mt-5 flex w-full gap-5">
+      <div className="mt-5 flex w-full gap-5">
         {sampleData.map((_) => (
           <div className="bg-WEATHER-neutral-800 flex w-full flex-col rounded-xl p-5">
             <p className="text-WEATHER-neutral-200">Feels Like</p>
@@ -43,7 +43,7 @@ const LeftDataContainer = () => {
 
       {/* Daily forecast data  */}
       <div className="mt-10 flex w-full flex-col">
-        <h1 className="text-md font-medium"> Daily forecast</h1>
+        <h1 className="text-md font-medium">Daily forecast</h1>
 
         <div className="mt-4 flex gap-3">
           {sampleData2.map((_) => (
