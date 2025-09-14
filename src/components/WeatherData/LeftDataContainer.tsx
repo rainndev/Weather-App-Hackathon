@@ -1,4 +1,3 @@
-import type { LocationResponse } from "@/types/weather-location.types";
 import type { WeatherApiResponse } from "../../types/weather.types";
 import { formatDate, getDayOfWeek } from "../../utils/date";
 import { getWeatherIcon } from "../../utils/weatherIcon";
