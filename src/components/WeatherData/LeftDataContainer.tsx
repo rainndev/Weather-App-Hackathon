@@ -1,3 +1,4 @@
+import type { LocationResponse } from "@/types/weather-location.types";
 import type { WeatherApiResponse } from "../../types/weather.types";
 import { formatDate, getDayOfWeek } from "../../utils/date";
 import { getWeatherIcon } from "../../utils/weatherIcon";
@@ -5,10 +6,11 @@ import { getWeatherIcon } from "../../utils/weatherIcon";
 const sampleData = [...Array(4)];
 
 interface LeftDataContainerProps {
+  location: string;
   data: WeatherApiResponse | undefined;
 }
 
-const LeftDataContainer = ({ data }: LeftDataContainerProps) => {
+const LeftDataContainer = ({ data, location }: LeftDataContainerProps) => {
   const currentTemp = +(data?.current?.temperature_2m ?? 0);
   const currentDate = data?.current?.time;
 
@@ -24,7 +26,7 @@ const LeftDataContainer = ({ data }: LeftDataContainerProps) => {
 
         <div className="absolute top-0 left-0 flex h-full w-full items-center justify-between p-6">
           <div>
-            <h2 className="text-2xl font-semibold">Berlin, Germany</h2>
+            <h2 className="text-2xl font-semibold">{location}</h2>
             <p className="text-WEATHER-neutral-200 text-md mt-1">
               {formatDate(String(currentDate))}
             </p>
@@ -38,7 +40,7 @@ const LeftDataContainer = ({ data }: LeftDataContainerProps) => {
             />
 
             <h1 className="text-8xl font-semibold italic">
-              {data?.current.temperature_2m}°
+              {data?.current?.temperature_2m}°
             </h1>
           </div>
         </div>
@@ -51,7 +53,7 @@ const LeftDataContainer = ({ data }: LeftDataContainerProps) => {
             className="bg-WEATHER-neutral-800 flex w-full flex-col rounded-xl p-5"
           >
             <p className="text-WEATHER-neutral-200">Feels Like</p>
-            <h1 className="mt-3 text-3xl">{data?.current.temperature_2m}°</h1>
+            <h1 className="mt-3 text-3xl">{data?.current?.temperature_2m}°</h1>
           </div>
         ))}
       </div>
@@ -61,9 +63,9 @@ const LeftDataContainer = ({ data }: LeftDataContainerProps) => {
         <h1 className="text-md font-medium">Daily forecast</h1>
 
         <div className="mt-4 flex gap-3">
-          {data?.daily.time.map((date, i) => {
-            const minTemp = data?.daily.temperature_2m_min[i].toFixed(0);
-            const maxTemp = data?.daily.temperature_2m_max[i].toFixed(0);
+          {data?.daily?.time?.map((date, i) => {
+            const minTemp = data?.daily?.temperature_2m_min[i].toFixed(0);
+            const maxTemp = data?.daily?.temperature_2m_max[i].toFixed(0);
 
             return (
               <div

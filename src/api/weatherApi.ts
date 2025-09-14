@@ -1,13 +1,16 @@
+import type { LocationResponse } from "@/types/weather-location.types";
 import type { WeatherApiResponse } from "@/types/weather.types";
 import axios from "axios";
 
 const API_BASE_URL = "https://api.open-meteo.com/v1/forecast";
+const API_LOCATION_BASE_URL = "https://geocoding-api.open-meteo.com/v1";
+// https://geocoding-api.open-meteo.com/v1/search?name=Arayat
 
 export type temperatureType = "fahrenheit" | "celsius";
 
 export const fetchWeather = async (
-  latitude: string,
-  longitude: string,
+  latitude: number | undefined,
+  longitude: number | undefined,
   temperature_unit: temperatureType,
 ): Promise<WeatherApiResponse> => {
   try {
@@ -25,6 +28,23 @@ export const fetchWeather = async (
     return response.data;
   } catch (error) {
     console.error("Error fetching weather data:", error);
+    throw error;
+  }
+};
+
+export const fetchLocation = async (
+  city: string,
+): Promise<LocationResponse> => {
+  try {
+    const response = await axios.get(`${API_LOCATION_BASE_URL}/search`, {
+      params: {
+        name: city,
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching location data:", error);
     throw error;
   }
 };
