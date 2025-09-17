@@ -11,14 +11,16 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-import week from "@/data/week.json";
+import { getLongDate } from "@/utils/date";
 
 interface DropdownHourlyForecastProps {
+  data: string[] | undefined;
   day: string;
   setDay: (value: string) => void;
 }
 
 export function DropdownHourlyForecast({
+  data,
   day,
   setDay,
 }: DropdownHourlyForecastProps) {
@@ -29,15 +31,19 @@ export function DropdownHourlyForecast({
           className="bg-WEATHER-neutral-600 hover:bg-WEATHER-neutral-600 text-WEATHER-neutral-200 hover:text-WEATHER-neutral-300 border-WEATHER-neutral-600"
           variant="outline"
         >
-          {day}
+          {getLongDate(day)}
           <img src="/public/images/icon-dropdown.svg" className="size-3" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="bg-WEATHER-neutral-600 text-WEATHER-neutral-0 border-WEATHER-neutral-600 w-fit border">
         <DropdownMenuRadioGroup value={day} onValueChange={setDay}>
-          {week.map((dayItem) => (
-            <DropdownMenuRadioItem className="p-2 px-4" value={dayItem}>
-              {dayItem}
+          {data?.map((dayItem) => (
+            <DropdownMenuRadioItem
+              key={dayItem}
+              className="p-2 px-4"
+              value={dayItem}
+            >
+              {getLongDate(dayItem)}
             </DropdownMenuRadioItem>
           ))}
         </DropdownMenuRadioGroup>
