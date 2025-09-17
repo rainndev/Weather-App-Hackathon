@@ -1,10 +1,17 @@
 import { useState } from "react";
 import { DropdownHourlyForecast } from "./DropdownHourlyForecast";
+import type { DailyForecast } from "@/types/weather.types";
+import { getLongDate } from "@/utils/date";
 
 const sampleData = [...Array(8)];
 
-const RightDataContainer = () => {
-  const [day, setDay] = useState("Sunday");
+interface RightDataContainerProps {
+  daily: DailyForecast | undefined;
+}
+
+const RightDataContainer = ({ daily }: RightDataContainerProps) => {
+  const defaultDay = getLongDate(daily?.time[0] ?? "");
+  const [day, setDay] = useState(defaultDay);
 
   return (
     <div className="bg-WEATHER-neutral-800 min-h-full w-[34%] rounded-2xl p-5">

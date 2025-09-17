@@ -20,7 +20,7 @@ const WeatherDataMain = ({
       ) : (
         <>
           <LeftDataContainer location={location} data={weatherData} />
-          <RightDataContainer />
+          <RightDataContainer daily={weatherData?.daily} />
         </>
       )}
     </div>

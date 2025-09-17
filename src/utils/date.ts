@@ -30,3 +30,13 @@ export const formatDate = (isoString: string) => {
 
   return date.toLocaleDateString("en-US", options);
 };
+
+export const getLongDate = (isoString: string) => {
+  const date = new Date(isoString);
+
+  const options: Intl.DateTimeFormatOptions = {
+    weekday: "long",
+  };
+
+  return date.toLocaleDateString("en-US", options);
+};
