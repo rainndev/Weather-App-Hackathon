@@ -48,3 +48,28 @@ export const fetchLocation = async (
     throw error;
   }
 };
+
+export const fetchWeatherWithDate = async (
+  startDate: string | undefined,
+  endDate: string | undefined,
+  latitude: number | undefined,
+  longitude: number | undefined,
+  temperature_unit: temperatureType,
+): Promise<Pick<WeatherApiResponse, "hourly">> => {
+  try {
+    const response = await axios.get(API_BASE_URL, {
+      params: {
+        latitude: latitude,
+        longitude: longitude,
+        hourly: "temperature_2m",
+        temperature_unit: temperature_unit,
+        start_date: startDate,
+        end_date: endDate,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching weather data with date:", error);
+    throw error;
+  }
+};
