@@ -40,3 +40,35 @@ export const getLongDate = (isoString: string) => {
 
   return date.toLocaleDateString("en-US", options);
 };
+
+/**
+ * Converts an ISO 8601 timestamp to a 12-hour format string, showing only the hour.
+ * @param {string} isoTimestamp The timestamp string in ISO 8601 format (e.g., '2025-09-17T15:30:00').
+ * @returns {string} The time in 12-hour format (e.g., '3 PM').
+ */
+export const convertTo12HrFormat = (isoTimestamp: number) => {
+  try {
+    const date = new Date(isoTimestamp);
+
+    // Check if the date object is valid
+    if (isNaN(date.getTime())) {
+      throw new Error("Invalid timestamp provided.");
+    }
+
+    let hours = date.getHours();
+    const ampm = hours >= 12 ? "PM" : "AM";
+
+    // Convert to 12-hour format
+    hours = hours % 12;
+    hours = hours ? hours : 12; // The hour '0' should be '12'
+
+    return `${hours} ${ampm}`;
+  } catch (error) {
+    if (error instanceof Error) {
+      console.error(error.message);
+    } else {
+      console.error(String(error));
+    }
+    return null; // Return null or handle the error as appropriate
+  }
+};
