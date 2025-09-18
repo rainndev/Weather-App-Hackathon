@@ -1,12 +1,10 @@
+import { useSearchCity } from "@/context/SearchCity";
 import { useState } from "react";
 
-interface SearchBarProps {
-  city: string;
-  setCity: (value: string) => void;
-}
-
-const SearchBar = ({ city, setCity }: SearchBarProps) => {
+const SearchBar = () => {
+  const { city, setSearchCity } = useSearchCity();
   const [inputCity, setInputCity] = useState("Arayat");
+
   console.log("city", city);
   return (
     <div className="bg text-WEATHER-neutral-0 mt-5 flex w-full flex-col items-center">
@@ -33,7 +31,7 @@ const SearchBar = ({ city, setCity }: SearchBarProps) => {
 
         {/* search button */}
         <button
-          onClick={() => setCity(inputCity)}
+          onClick={() => setSearchCity(inputCity)}
           className="bg-WEATHER-blue-500 text-WEATHER-neutral-200 rounded-lg px-5"
         >
           Search

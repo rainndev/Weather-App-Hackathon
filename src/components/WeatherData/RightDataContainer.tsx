@@ -12,8 +12,7 @@ interface RightDataContainerProps {
 const RightDataContainer = ({ daily }: RightDataContainerProps) => {
   const [day, setDay] = useState(daily?.time[0] ?? "");
 
-  console.log("time selected", day);
-  const { hourlyDataDate } = useWeatherData("Arayat", day, day);
+  const { hourlyDataDate } = useWeatherData(day, day);
 
   return (
     <div className="bg-WEATHER-neutral-800 min-h-full w-[34%] rounded-2xl p-5">

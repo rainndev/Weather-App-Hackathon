@@ -1,12 +1,10 @@
 import { fetchWeather, fetchWeatherWithDate } from "@/api/weatherApi";
 import { useQuery } from "@tanstack/react-query";
 import { useWeatherLocation } from "./useWeatherLocation";
+import { useSearchCity } from "@/context/SearchCity";
 
-export const useWeatherData = (
-  city: string,
-  startDate?: string,
-  endDate?: string,
-) => {
+export const useWeatherData = (startDate?: string, endDate?: string) => {
+  const { city } = useSearchCity();
   const { locationData, locationPH, currentPHlocation } =
     useWeatherLocation(city);
 
