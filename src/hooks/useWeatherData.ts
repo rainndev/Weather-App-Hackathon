@@ -5,7 +5,7 @@ import { useSearchCity } from "@/context/SearchCity";
 
 export const useWeatherData = (startDate?: string, endDate?: string) => {
   const { city } = useSearchCity();
-  const { locationData, locationPH, currentPHlocation } =
+  const { isLoadingLocation, locationData, locationPH, currentPHlocation } =
     useWeatherLocation(city);
 
   // 2. Fetch weather data only when location is ready
@@ -22,7 +22,7 @@ export const useWeatherData = (startDate?: string, endDate?: string) => {
 
       return fetchWeather(latitude, longitude, "celsius");
     },
-    enabled: !!locationData.data?.results?.length,
+    enabled: !!locationData?.results?.length,
     refetchOnWindowFocus: false,
     staleTime: 300000,
   });
@@ -46,7 +46,7 @@ export const useWeatherData = (startDate?: string, endDate?: string) => {
         "celsius",
       );
     },
-    enabled: !!locationData.data?.results?.length,
+    enabled: !!locationData?.results?.length,
     refetchOnWindowFocus: false,
     staleTime: 300000,
   });
@@ -57,6 +57,7 @@ export const useWeatherData = (startDate?: string, endDate?: string) => {
     isLoading,
     error,
     isError,
+    isLoadingLocation,
     hourlyDataDate,
     isHourlyDataDateLoading,
     hourlyDataDateError,

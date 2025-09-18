@@ -3,14 +3,20 @@ import LeftDataContainer from "./LeftDataContainer";
 import RightDataContainer from "./RightDataContainer";
 
 const WeatherDataMain = () => {
-  const { currentPHlocation, isError, isLoading, weatherData, error } =
-    useWeatherData();
+  const {
+    isLoadingLocation,
+    currentPHlocation,
+    isError,
+    isLoading,
+    weatherData,
+    error,
+  } = useWeatherData();
 
   if (isError) {
     console.error("error occured", error?.message);
   }
 
-  if (isLoading) {
+  if (isLoading || isLoadingLocation) {
     return <p>Loading...</p>;
   }
 
