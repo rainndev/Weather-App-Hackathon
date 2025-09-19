@@ -41,7 +41,7 @@ const SearchBar = () => {
                     setLocationResult(location);
                     console.log("location res ", location);
                   }}
-                  className={`${locationResult?.id === location.id && "bg-WEATHER-neutral-700 border-WEATHER-neutral-600 border"} rounded-lg p-2`}
+                  className={`${locationResult?.id === location.id && "bg-WEATHER-neutral-700 border-WEATHER-neutral-600 border"} hover:bg-WEATHER-neutral-700 rounded-lg p-2`}
                 >
                   <p>
                     {location.name}, {location.country}
