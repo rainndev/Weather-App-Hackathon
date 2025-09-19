@@ -21,7 +21,8 @@ export const fetchWeather = async (
         daily: "temperature_2m_max,temperature_2m_min",
         hourly: "temperature_2m",
         temperature_unit: temperature_unit,
-        current: "temperature_2m",
+        current:
+          "temperature_2m,apparent_temperature,relative_humidity_2m,wind_speed_10m,precipitation",
       },
     });
 

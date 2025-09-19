@@ -12,6 +12,10 @@ export type CurrentWeather = {
   time: number;
   interval: number;
   temperature_2m: number;
+  apparent_temperature: number;
+  relative_humidity_2m: number;
+  wind_speed_10m: number;
+  precipitation: number;
 };
 
 // Define the structure of the hourly forecast

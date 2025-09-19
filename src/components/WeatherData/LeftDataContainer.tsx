@@ -46,15 +46,32 @@ const LeftDataContainer = ({ data, location }: LeftDataContainerProps) => {
       </div>
 
       <div className="mt-5 flex w-full gap-5">
-        {sampleData.map((_, i) => (
-          <div
-            key={i}
-            className="bg-WEATHER-neutral-800 flex w-full flex-col rounded-xl p-5"
-          >
-            <p className="text-WEATHER-neutral-200">Feels Like</p>
-            <h1 className="mt-3 text-3xl">{data?.current?.temperature_2m}°</h1>
-          </div>
-        ))}
+        {/* Feels like */}
+        <div className="bg-WEATHER-neutral-800 flex w-full flex-col rounded-xl p-5">
+          <p className="text-WEATHER-neutral-200">Feels Like</p>
+          <h1 className="mt-3 text-3xl">
+            {data?.current?.apparent_temperature}°
+          </h1>
+        </div>
+        {/* Humidity */}
+        <div className="bg-WEATHER-neutral-800 flex w-full flex-col rounded-xl p-5">
+          <p className="text-WEATHER-neutral-200">Humidity</p>
+          <h1 className="mt-3 text-3xl">
+            {data?.current?.relative_humidity_2m}°
+          </h1>
+        </div>
+
+        {/* Wind */}
+        <div className="bg-WEATHER-neutral-800 flex w-full flex-col rounded-xl p-5">
+          <p className="text-WEATHER-neutral-200">Humidity</p>
+          <h1 className="mt-3 text-3xl">{data?.current?.wind_speed_10m}°</h1>
+        </div>
+
+        {/* Wind */}
+        <div className="bg-WEATHER-neutral-800 flex w-full flex-col rounded-xl p-5">
+          <p className="text-WEATHER-neutral-200">Precipitation</p>
+          <h1 className="mt-3 text-3xl">{data?.current?.precipitation}°</h1>
+        </div>
       </div>
 
       {/* Daily forecast data  */}
