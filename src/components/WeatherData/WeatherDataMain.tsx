@@ -25,7 +25,7 @@ const WeatherDataMain = () => {
   console.log("data result", weatherData);
 
   return (
-    <div className="text-WEATHER-neutral-0 mt-10 flex h-full w-full gap-5">
+    <div className="text-WEATHER-neutral-0 mt-10 grid h-screen w-full grid-cols-[1fr_35%] gap-5">
       <LeftDataContainer location={currentPHlocation} data={weatherData} />
       <RightDataContainer daily={weatherData?.daily} />
     </div>

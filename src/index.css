@@ -138,3 +138,13 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* For WebKit browsers (Chrome, Safari, Opera) */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* For Firefox */
+.scrollbar-hide {
+  scrollbar-width: none; /* Also hides the scrollbar */
+}
