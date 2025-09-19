@@ -10,17 +10,9 @@ export const useWeatherLocation = (city: string) => {
     staleTime: 300000,
   });
 
-  const locationPH = locationData?.results?.filter(
-    (data) => data.country_code === "PH",
-  )[0];
-
-  const currentPHlocation =
-    `${locationPH?.name}, ${locationPH?.country}` || "Unknown Location";
-
   return {
     isLoadingLocation,
     locationData,
-    locationPH,
-    currentPHlocation,
+    currentPHlocation: "Unknown",
   };
 };

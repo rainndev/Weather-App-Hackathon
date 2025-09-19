@@ -4,13 +4,15 @@ import RightDataContainer from "./RightDataContainer";
 
 const WeatherDataMain = () => {
   const {
+    locationResult,
     isLoadingLocation,
-    currentPHlocation,
     isError,
     isLoading,
     weatherData,
     error,
   } = useWeatherData();
+
+  const currentPHlocation = `${locationResult?.name ?? "N/A"}, ${locationResult?.country ?? "N/A"}`;
 
   if (isError) {
     console.error("error occured", error?.message);

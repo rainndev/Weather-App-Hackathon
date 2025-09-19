@@ -1,11 +1,14 @@
 import { useSearchCity } from "@/context/SearchCity";
+import { useWeatherLocation } from "@/hooks/useWeatherLocation";
+import type { LocationResult } from "@/types/weather-location.types";
 import { useState } from "react";
 
 const SearchBar = () => {
-  const { city, setSearchCity } = useSearchCity();
-  const [inputCity, setInputCity] = useState("Arayat");
+  const { locationResult, setLocationResult } = useSearchCity();
+  const [inputCity, setInputCity] = useState("");
 
-  console.log("city", city);
+  const { locationData, isLoadingLocation } = useWeatherLocation(inputCity);
+
   return (
     <div className="bg text-WEATHER-neutral-0 mt-5 flex w-full flex-col items-center">
       <h1 className="font-bricolage text-5xl font-medium">
@@ -16,7 +19,9 @@ const SearchBar = () => {
         {/* search bar */}
         <div className="relative w-full">
           <input
+            id="search-bar"
             type="text"
+            list="countries"
             value={inputCity}
             onChange={(e) => setInputCity(e.target.value)}
             placeholder="Search for a place..."
@@ -27,13 +32,28 @@ const SearchBar = () => {
             src="/public/images/icon-search.svg"
             className="absolute top-1/2 left-3.5 size-4 -translate-y-1/2"
           />
+
+          {(locationData?.results?.length ?? 0) > 0 && !isLoadingLocation && (
+            <div className="bg-WEATHER-neutral-800 absolute z-20 mt-2 h-fit w-full cursor-pointer space-y-1 rounded-lg p-2">
+              {locationData?.results.map((location: LocationResult) => (
+                <div
+                  onClick={() => {
+                    setLocationResult(location);
+                    console.log("location res ", location);
+                  }}
+                  className={`${locationResult?.id === location.id && "bg-WEATHER-neutral-700 border-WEATHER-neutral-600 border"} rounded-lg p-2`}
+                >
+                  <p>
+                    {location.name}, {location.country}
+                  </p>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
 
         {/* search button */}
-        <button
-          onClick={() => setSearchCity(inputCity)}
-          className="bg-WEATHER-blue-500 text-WEATHER-neutral-200 rounded-lg px-5"
-        >
+        <button className="bg-WEATHER-blue-500 text-WEATHER-neutral-200 rounded-lg px-5">
           Search
         </button>
       </div>

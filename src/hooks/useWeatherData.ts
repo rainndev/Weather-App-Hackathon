@@ -4,9 +4,8 @@ import { useWeatherLocation } from "./useWeatherLocation";
 import { useSearchCity } from "@/context/SearchCity";
 
 export const useWeatherData = (startDate?: string, endDate?: string) => {
-  const { city } = useSearchCity();
-  const { isLoadingLocation, locationData, locationPH, currentPHlocation } =
-    useWeatherLocation(city);
+  const { locationResult, city } = useSearchCity();
+  const { isLoadingLocation, locationData } = useWeatherLocation(city);
 
   // 2. Fetch weather data only when location is ready
   const {
@@ -15,14 +14,15 @@ export const useWeatherData = (startDate?: string, endDate?: string) => {
     error,
     isError,
   } = useQuery({
-    queryKey: ["weather", city],
+    queryKey: ["weather", locationResult?.latitude, locationResult?.longitude],
     queryFn: () => {
-      const latitude = locationPH?.latitude;
-      const longitude = locationPH?.longitude;
-
-      return fetchWeather(latitude, longitude, "celsius");
+      return fetchWeather(
+        locationResult?.latitude,
+        locationResult?.longitude,
+        "celsius",
+      );
     },
-    enabled: !!locationData?.results?.length,
+    enabled: !!locationResult?.latitude,
     refetchOnWindowFocus: false,
     staleTime: 300000,
   });
@@ -33,16 +33,19 @@ export const useWeatherData = (startDate?: string, endDate?: string) => {
     error: hourlyDataDateError,
     isError: isHourlyDataDate,
   } = useQuery({
-    queryKey: ["weather-data-x-date", city, startDate, endDate],
+    queryKey: [
+      "weather-data-x-date",
+      locationResult?.latitude,
+      locationResult?.longitude,
+      startDate,
+      endDate,
+    ],
     queryFn: () => {
-      const latitude = locationPH?.latitude;
-      const longitude = locationPH?.longitude;
-
       return fetchWeatherWithDate(
         startDate,
         endDate,
-        latitude,
-        longitude,
+        locationResult?.latitude,
+        locationResult?.longitude,
         "celsius",
       );
     },
@@ -52,8 +55,8 @@ export const useWeatherData = (startDate?: string, endDate?: string) => {
   });
 
   return {
+    locationResult,
     weatherData,
-    currentPHlocation,
     isLoading,
     error,
     isError,
