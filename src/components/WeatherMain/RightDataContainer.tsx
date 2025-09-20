@@ -1,16 +1,12 @@
 import { useState } from "react";
 import { DropdownHourlyForecast } from "./DropdownHourlyForecast";
-import type { DailyForecast } from "@/types/weather.types";
 import { useWeatherData } from "@/hooks/useWeatherData";
 import { convertTo12HrFormat } from "@/utils/date";
 import { getWeatherIcon } from "@/utils/weatherIcon";
 
-interface RightDataContainerProps {
-  daily: DailyForecast | undefined;
-}
-
-const RightDataContainer = ({ daily }: RightDataContainerProps) => {
-  const [day, setDay] = useState(daily?.time[0] ?? "");
+const RightDataContainer = () => {
+  const { weatherData } = useWeatherData();
+  const [day, setDay] = useState(weatherData?.daily?.time[0] ?? "");
 
   const { hourlyDataDate } = useWeatherData(day, day);
 
@@ -20,7 +16,11 @@ const RightDataContainer = ({ daily }: RightDataContainerProps) => {
       {/* header options */}
       <div className="flex justify-between">
         <p className="text-md font-medium">Hourly forecast</p>
-        <DropdownHourlyForecast data={daily?.time} day={day} setDay={setDay} />
+        <DropdownHourlyForecast
+          data={weatherData?.daily?.time}
+          day={day}
+          setDay={setDay}
+        />
       </div>
 
       {/* hourly data  */}
