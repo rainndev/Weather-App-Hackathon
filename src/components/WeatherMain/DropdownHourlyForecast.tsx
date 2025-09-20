@@ -33,12 +33,12 @@ export function DropdownHourlyForecast({
           <img src="/public/images/icon-dropdown.svg" className="size-3" />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="bg-WEATHER-neutral-600 text-WEATHER-neutral-0 border-WEATHER-neutral-600 w-fit border">
+      <DropdownMenuContent className="bg-WEATHER-neutral-800 text-WEATHER-neutral-0 border-WEATHER-neutral-600 w-fit border">
         <DropdownMenuRadioGroup value={day} onValueChange={setDay}>
           {data?.map((dayItem) => (
             <DropdownMenuRadioItem
               key={dayItem}
-              className="p-2 px-4"
+              className="hover:!bg-WEATHER-neutral-700 hover:!text-WEATHER-neutral-0 p-2 px-4"
               value={dayItem}
             >
               {getLongDate(dayItem)}
