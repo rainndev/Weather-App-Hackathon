@@ -55,14 +55,16 @@ const LeftDataContainer = ({ data, location }: LeftDataContainerProps) => {
         <div className="bg-WEATHER-neutral-800 flex w-full flex-col rounded-xl p-5">
           <p className="text-WEATHER-neutral-200">Humidity</p>
           <h1 className="mt-3 text-3xl">
-            {data?.current?.relative_humidity_2m}°
+            {data?.current?.relative_humidity_2m}%
           </h1>
         </div>
 
         {/* Wind */}
         <div className="bg-WEATHER-neutral-800 flex w-full flex-col rounded-xl p-5">
-          <p className="text-WEATHER-neutral-200">Humidity</p>
-          <h1 className="mt-3 text-3xl">{data?.current?.wind_speed_10m}°</h1>
+          <p className="text-WEATHER-neutral-200">Wind</p>
+          <h1 className="mt-3 text-3xl">
+            {data?.current?.wind_speed_10m} km/h
+          </h1>
         </div>
 
         {/* Wind */}
