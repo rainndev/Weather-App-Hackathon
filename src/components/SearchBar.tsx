@@ -41,9 +41,9 @@ const SearchBar = () => {
               !isLoadingLocation &&
               isSelected && (
                 <motion.div
-                  initial={{ opacity: 0, y: -2 }}
+                  initial={{ opacity: 0, y: -4 }}
                   animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -2 }}
+                  exit={{ opacity: 0, y: -4 }}
                   className="bg-WEATHER-neutral-800 border-WEATHER-neutral-700 absolute z-20 mt-2 h-fit w-full cursor-pointer space-y-1 rounded-lg border p-2 shadow-2xl"
                 >
                   {locationData?.results.map((location: LocationResult) => (
