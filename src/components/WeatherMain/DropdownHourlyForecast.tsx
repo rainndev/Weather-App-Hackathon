@@ -13,7 +13,7 @@ import { getLongDate } from "@/utils/date";
 
 interface DropdownHourlyForecastProps {
   data: string[] | undefined;
-  day: string;
+  day: string | undefined;
   setDay: (value: string) => void;
 }
 
@@ -22,6 +22,8 @@ export function DropdownHourlyForecast({
   day,
   setDay,
 }: DropdownHourlyForecastProps) {
+  console.log("day in dropdown", day);
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -29,7 +31,7 @@ export function DropdownHourlyForecast({
           className="bg-WEATHER-neutral-600 hover:bg-WEATHER-neutral-600 text-WEATHER-neutral-200 hover:text-WEATHER-neutral-300 border-WEATHER-neutral-600"
           variant="outline"
         >
-          {getLongDate(day)}
+          {getLongDate(day ?? "")}
           <img src="/public/images/icon-dropdown.svg" className="size-3" />
         </Button>
       </DropdownMenuTrigger>

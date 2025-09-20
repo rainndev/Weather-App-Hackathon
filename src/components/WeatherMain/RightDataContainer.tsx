@@ -1,16 +1,30 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { DropdownHourlyForecast } from "./DropdownHourlyForecast";
 import { useWeatherData } from "@/hooks/useWeatherData";
-import { convertTo12HrFormat } from "@/utils/date";
+import { convertTo12HrFormat, getLongDate } from "@/utils/date";
 import { getWeatherIcon } from "@/utils/weatherIcon";
 
 const RightDataContainer = () => {
   const { weatherData } = useWeatherData();
-  const [day, setDay] = useState(weatherData?.daily?.time[0] ?? "");
+  const [day, setDay] = useState<string | undefined>();
 
-  const { hourlyDataDate } = useWeatherData(day, day);
+  useEffect(() => {
+    if (weatherData) {
+      setDay(weatherData.daily.time[0]);
+    }
+  }, [weatherData]);
 
-  console.log("sorted data", hourlyDataDate);
+  const filteredHourlyData = weatherData?.hourly.time
+    .filter((data) => getLongDate(String(data)) === getLongDate(String(day)))
+    .map((data) => {
+      const originalIndex = weatherData.hourly.time.indexOf(data);
+      const hourlyTemp = weatherData.hourly.temperature_2m[originalIndex];
+      return {
+        hourlyTime: data,
+        hourlyTemp,
+      };
+    });
+
   return (
     <div className="bg-WEATHER-neutral-800 scrollbar-hide overflow-y-auto rounded-2xl p-5">
       {/* header options */}
@@ -25,9 +39,9 @@ const RightDataContainer = () => {
 
       {/* hourly data  */}
       <div className="mt-4 space-y-3">
-        {hourlyDataDate?.hourly?.time.map((data, i) => {
+        {filteredHourlyData?.map((data, i) => {
           //temp
-          const temp = hourlyDataDate.hourly.temperature_2m[i];
+          const temp = data.hourlyTemp;
           return (
             <div
               key={i}
@@ -39,7 +53,7 @@ const RightDataContainer = () => {
                   className="size-10 object-cover"
                   alt=""
                 />
-                <span>{convertTo12HrFormat(data)}</span>
+                <span>{convertTo12HrFormat(data.hourlyTime)}</span>
               </div>
 
               <p className="text-md mr-2">{temp.toFixed(0)} °</p>
