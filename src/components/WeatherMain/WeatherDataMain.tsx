@@ -3,7 +3,7 @@ import RightDataContainer from "./RightDataContainer";
 
 const WeatherDataMain = () => {
   return (
-    <div className="text-WEATHER-neutral-0 mt-10 grid h-screen w-full grid-cols-[1fr_35%] gap-5">
+    <div className="text-WEATHER-neutral-0 mt-10 grid h-175 w-full grid-cols-[1fr_35%] gap-5">
       <LeftDataContainer />
       <RightDataContainer />
     </div>

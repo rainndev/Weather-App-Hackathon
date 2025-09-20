@@ -4,8 +4,10 @@ import { useWeatherData } from "@/hooks/useWeatherData";
 import { convertTo12HrFormat, getLongDate } from "@/utils/date";
 import { getWeatherIcon } from "@/utils/weatherIcon";
 
+const mockHourlyData = [...Array(9)];
+
 const RightDataContainer = () => {
-  const { weatherData } = useWeatherData();
+  const { isLoading, weatherData } = useWeatherData();
   const [day, setDay] = useState<string | undefined>();
 
   useEffect(() => {
@@ -39,27 +41,45 @@ const RightDataContainer = () => {
 
       {/* hourly data  */}
       <div className="mt-4 space-y-3">
-        {filteredHourlyData?.map((data, i) => {
-          //temp
-          const temp = data.hourlyTemp;
-          return (
-            <div
-              key={i}
-              className="bg-WEATHER-neutral-700 border-WEATHER-neutral-600 flex w-full items-center justify-between rounded-lg border p-2.5"
-            >
-              <div className="flex items-center gap-2">
-                <img
-                  src={getWeatherIcon(temp, "celsius")}
-                  className="size-10 object-cover"
-                  alt=""
-                />
-                <span>{convertTo12HrFormat(data.hourlyTime)}</span>
-              </div>
+        {isLoading
+          ? mockHourlyData.map((_, i) => (
+              <div
+                key={i}
+                className="bg-WEATHER-neutral-700 border-WEATHER-neutral-600 flex w-full animate-pulse items-center justify-between rounded-lg border p-2.5"
+              >
+                <div className="flex items-center gap-2">
+                  <img
+                    src={getWeatherIcon(22, "celsius")}
+                    className="invisible size-10 object-cover"
+                    alt=""
+                  />
+                  <span className="invisible">{12}</span>
+                </div>
 
-              <p className="text-md mr-2">{temp.toFixed(0)} °</p>
-            </div>
-          );
-        })}
+                <p className="text-md invisible mr-2">23 °</p>
+              </div>
+            ))
+          : filteredHourlyData?.map((data, i) => {
+              //temp
+              const temp = data.hourlyTemp;
+              return (
+                <div
+                  key={i}
+                  className="bg-WEATHER-neutral-700 border-WEATHER-neutral-600 flex w-full items-center justify-between rounded-lg border p-2.5"
+                >
+                  <div className="flex items-center gap-2">
+                    <img
+                      src={getWeatherIcon(temp, "celsius")}
+                      className="size-10 object-cover"
+                      alt=""
+                    />
+                    <span>{convertTo12HrFormat(data.hourlyTime)}</span>
+                  </div>
+
+                  <p className="text-md mr-2">{temp.toFixed(0)} °</p>
+                </div>
+              );
+            })}
       </div>
     </div>
   );
