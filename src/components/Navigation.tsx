@@ -27,8 +27,11 @@ const Navigation = () => {
 
         {/* dropdown */}
         {isDropdownOpen && (
-          <div className="bg-WEATHER-neutral-800 border-WEATHER-neutral-600 absolute top-full right-0 mt-1 h-100 w-50 rounded-lg border px-4 py-2.5 shadow-2xl">
-            <button className="mb-4 text-base">Switch to Imperial</button>
+          <div className="bg-WEATHER-neutral-800 border-WEATHER-neutral-600 absolute top-full right-0 mt-1 h-fit w-50 rounded-lg border px-4 py-2.5 shadow-2xl">
+            <div className="hover:bg-WEATHER-neutral-700 -mx-2 mb-2 cursor-pointer rounded-md p-2 text-sm">
+              Switch to Imperial
+            </div>
+
             <div>
               <p className="text-WEATHER-neutral-300 mb-2 text-sm">
                 Temperature
