@@ -6,6 +6,7 @@ import { useState } from "react";
 const SearchBar = () => {
   const { locationResult, setLocationResult } = useSearchCity();
   const [inputCity, setInputCity] = useState("");
+  const [isSelected, setSelected] = useState(false);
 
   const { locationData, isLoadingLocation } = useWeatherLocation(inputCity);
 
@@ -23,6 +24,7 @@ const SearchBar = () => {
             type="text"
             list="countries"
             value={inputCity}
+            onClick={() => setSelected(true)}
             onChange={(e) => setInputCity(e.target.value)}
             placeholder="Search for a place..."
             className="bg-WEATHER-neutral-800 w-full rounded-lg py-2.5 pr-5 pl-10 text-base"
@@ -33,23 +35,26 @@ const SearchBar = () => {
             className="absolute top-1/2 left-3.5 size-4 -translate-y-1/2"
           />
 
-          {(locationData?.results?.length ?? 0) > 0 && !isLoadingLocation && (
-            <div className="bg-WEATHER-neutral-800 border-WEATHER-neutral-700 absolute z-20 mt-2 h-fit w-full cursor-pointer space-y-1 rounded-lg border p-2 shadow-2xl">
-              {locationData?.results.map((location: LocationResult) => (
-                <div
-                  onClick={() => {
-                    setLocationResult(location);
-                    console.log("location res ", location);
-                  }}
-                  className={`${locationResult?.id === location.id && "bg-WEATHER-neutral-700 border-WEATHER-neutral-600 border"} hover:bg-WEATHER-neutral-700 rounded-lg p-2`}
-                >
-                  <p>
-                    {location.name}, {location.country}
-                  </p>
-                </div>
-              ))}
-            </div>
-          )}
+          {(locationData?.results?.length ?? 0) > 0 &&
+            !isLoadingLocation &&
+            isSelected && (
+              <div className="bg-WEATHER-neutral-800 border-WEATHER-neutral-700 absolute z-20 mt-2 h-fit w-full cursor-pointer space-y-1 rounded-lg border p-2 shadow-2xl">
+                {locationData?.results.map((location: LocationResult) => (
+                  <div
+                    onClick={() => {
+                      setLocationResult(location);
+                      setSelected(false);
+                      console.log("location res ", location);
+                    }}
+                    className={`${locationResult?.id === location.id && "bg-WEATHER-neutral-700 border-WEATHER-neutral-600 border"} hover:bg-WEATHER-neutral-700 rounded-lg p-2`}
+                  >
+                    <p>
+                      {location.name}, {location.country}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            )}
         </div>
 
         {/* search button */}
