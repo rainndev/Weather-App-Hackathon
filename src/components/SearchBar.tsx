@@ -1,6 +1,7 @@
 import { useSearchCity } from "@/context/SearchCity";
 import { useWeatherLocation } from "@/hooks/useWeatherLocation";
 import type { LocationResult } from "@/types/weather-location.types";
+import { AnimatePresence, motion } from "motion/react";
 import { useState } from "react";
 
 const SearchBar = () => {
@@ -35,26 +36,33 @@ const SearchBar = () => {
             className="absolute top-1/2 left-3.5 size-4 -translate-y-1/2"
           />
 
-          {(locationData?.results?.length ?? 0) > 0 &&
-            !isLoadingLocation &&
-            isSelected && (
-              <div className="bg-WEATHER-neutral-800 border-WEATHER-neutral-700 absolute z-20 mt-2 h-fit w-full cursor-pointer space-y-1 rounded-lg border p-2 shadow-2xl">
-                {locationData?.results.map((location: LocationResult) => (
-                  <div
-                    onClick={() => {
-                      setLocationResult(location);
-                      setSelected(false);
-                      console.log("location res ", location);
-                    }}
-                    className={`${locationResult?.id === location.id && "bg-WEATHER-neutral-700 border-WEATHER-neutral-600 border"} hover:bg-WEATHER-neutral-700 rounded-lg p-2`}
-                  >
-                    <p>
-                      {location.name}, {location.country}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            )}
+          <AnimatePresence>
+            {(locationData?.results?.length ?? 0) > 0 &&
+              !isLoadingLocation &&
+              isSelected && (
+                <motion.div
+                  initial={{ opacity: 0, y: -2 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -2 }}
+                  className="bg-WEATHER-neutral-800 border-WEATHER-neutral-700 absolute z-20 mt-2 h-fit w-full cursor-pointer space-y-1 rounded-lg border p-2 shadow-2xl"
+                >
+                  {locationData?.results.map((location: LocationResult) => (
+                    <div
+                      onClick={() => {
+                        setLocationResult(location);
+                        setSelected(false);
+                        console.log("location res ", location);
+                      }}
+                      className={`${locationResult?.id === location.id && "bg-WEATHER-neutral-700 border-WEATHER-neutral-600 border"} hover:bg-WEATHER-neutral-700 rounded-lg p-2`}
+                    >
+                      <p>
+                        {location.name}, {location.country}
+                      </p>
+                    </div>
+                  ))}
+                </motion.div>
+              )}
+          </AnimatePresence>
         </div>
 
         {/* search button */}
