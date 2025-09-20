@@ -1,8 +1,8 @@
-import ErrorResponseUI from "./components/ErrorUI/ErrorResponseUI";
-import Navigation from "./components/Navigation";
-import SearchBar from "./components/SearchBar";
-import WeatherDataMain from "./components/WeatherData/WeatherDataMain";
-import { useWeatherData } from "./hooks/useWeatherData";
+import ErrorResponseUI from "@/components/ErrorUI/ErrorResponseUI";
+import Navigation from "@/components/Navigation";
+import SearchBar from "@/components/SearchBar";
+import WeatherDataMain from "@/components/WeatherMain/WeatherDataMain";
+import { useWeatherData } from "@/hooks/useWeatherData";
 
 const App = () => {
   const { isError, isHourlyDataDate } = useWeatherData();
