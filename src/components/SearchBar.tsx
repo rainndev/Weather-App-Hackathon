@@ -61,6 +61,7 @@ const SearchBar = () => {
                 >
                   {locationData?.results.map((location: LocationResult) => (
                     <div
+                      key={location.id}
                       onClick={() => {
                         setLocationResult(location);
                         setSelected(false);
