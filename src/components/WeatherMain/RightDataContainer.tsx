@@ -3,6 +3,7 @@ import { DropdownHourlyForecast } from "./DropdownHourlyForecast";
 import { useWeatherData } from "@/hooks/useWeatherData";
 import { convertTo12HrFormat, getLongDate } from "@/utils/date";
 import { getWeatherIcon } from "@/utils/weatherIcon";
+import { AnimatePresence, motion } from "motion/react";
 
 const mockHourlyData = [...Array(9)];
 
@@ -41,45 +42,54 @@ const RightDataContainer = () => {
 
       {/* hourly data  */}
       <div className="mt-4 space-y-3">
-        {isLoading
-          ? mockHourlyData.map((_, i) => (
-              <div
-                key={i}
-                className="bg-WEATHER-neutral-700 border-WEATHER-neutral-600 flex w-full animate-pulse items-center justify-between rounded-lg border p-2.5"
-              >
-                <div className="flex items-center gap-2">
-                  <img
-                    src={getWeatherIcon(22, "celsius")}
-                    className="invisible size-10 object-cover"
-                    alt=""
-                  />
-                  <span className="invisible">{12}</span>
-                </div>
-
-                <p className="text-md invisible mr-2">23 °</p>
+        {isLoading ? (
+          mockHourlyData.map((_, i) => (
+            <div
+              key={i}
+              className="bg-WEATHER-neutral-700 border-WEATHER-neutral-600 flex w-full animate-pulse items-center justify-between rounded-lg border p-2.5"
+            >
+              <div className="flex items-center gap-2">
+                <img
+                  src={getWeatherIcon(22, "celsius")}
+                  className="invisible size-10 object-cover"
+                  alt=""
+                />
+                <span className="invisible">{12}</span>
               </div>
-            ))
-          : filteredHourlyData?.map((data, i) => {
+
+              <p className="text-md invisible mr-2">23 °</p>
+            </div>
+          ))
+        ) : (
+          <AnimatePresence mode="wait">
+            {filteredHourlyData?.map((data, i) => {
               //temp
               const temp = data.hourlyTemp;
               return (
-                <div
-                  key={i}
+                <motion.div
+                  initial={{ opacity: 0, y: -2 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{
+                    delay: 0.02 * i,
+                  }}
+                  exit={{ opacity: 0, y: -2 }}
+                  key={`${day}-${data.hourlyTime}-${data.hourlyTemp}`}
                   className="bg-WEATHER-neutral-700 border-WEATHER-neutral-600 flex w-full items-center justify-between rounded-lg border p-2.5"
                 >
                   <div className="flex items-center gap-2">
                     <img
                       src={getWeatherIcon(temp, "celsius")}
                       className="size-10 object-cover"
-                      alt=""
                     />
                     <span>{convertTo12HrFormat(data.hourlyTime)}</span>
                   </div>
 
                   <p className="text-md mr-2">{temp.toFixed(0)} °</p>
-                </div>
+                </motion.div>
               );
             })}
+          </AnimatePresence>
+        )}
       </div>
     </div>
   );
