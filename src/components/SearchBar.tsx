@@ -34,7 +34,7 @@ const SearchBar = () => {
           />
 
           {(locationData?.results?.length ?? 0) > 0 && !isLoadingLocation && (
-            <div className="bg-WEATHER-neutral-800 absolute z-20 mt-2 h-fit w-full cursor-pointer space-y-1 rounded-lg p-2">
+            <div className="bg-WEATHER-neutral-800 border-WEATHER-neutral-700 absolute z-20 mt-2 h-fit w-full cursor-pointer space-y-1 rounded-lg border p-2 shadow-2xl">
               {locationData?.results.map((location: LocationResult) => (
                 <div
                   onClick={() => {
