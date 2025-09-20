@@ -3,9 +3,9 @@ import { useQuery } from "@tanstack/react-query";
 import { useWeatherLocation } from "./useWeatherLocation";
 import { useSearchCity } from "@/context/SearchCity";
 
-export const useWeatherData = (startDate?: string, endDate?: string) => {
+export const useWeatherData = () => {
   const { locationResult, city } = useSearchCity();
-  const { isLoadingLocation, locationData } = useWeatherLocation(city);
+  const { isLoadingLocation } = useWeatherLocation(city);
 
   // 2. Fetch weather data only when location is ready
   const {
@@ -27,33 +27,6 @@ export const useWeatherData = (startDate?: string, endDate?: string) => {
     staleTime: 300000,
   });
 
-  const {
-    data: hourlyDataDate,
-    isLoading: isHourlyDataDateLoading,
-    error: hourlyDataDateError,
-    isError: isHourlyDataDate,
-  } = useQuery({
-    queryKey: [
-      "weather-data-x-date",
-      locationResult?.latitude,
-      locationResult?.longitude,
-      startDate,
-      endDate,
-    ],
-    queryFn: () => {
-      return fetchWeatherWithDate(
-        startDate,
-        endDate,
-        locationResult?.latitude,
-        locationResult?.longitude,
-        "celsius",
-      );
-    },
-    enabled: !!locationData?.results?.length,
-    refetchOnWindowFocus: false,
-    staleTime: 300000,
-  });
-
   return {
     locationResult,
     weatherData,
@@ -61,9 +34,5 @@ export const useWeatherData = (startDate?: string, endDate?: string) => {
     error,
     isError,
     isLoadingLocation,
-    hourlyDataDate,
-    isHourlyDataDateLoading,
-    hourlyDataDateError,
-    isHourlyDataDate,
   };
 };
