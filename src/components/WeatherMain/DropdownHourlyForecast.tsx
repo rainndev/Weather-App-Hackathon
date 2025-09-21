@@ -28,7 +28,7 @@ export function DropdownHourlyForecast({
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button
-          className="bg-WEATHER-neutral-600 hover:bg-WEATHER-neutral-600 text-WEATHER-neutral-200 hover:text-WEATHER-neutral-300 border-WEATHER-neutral-600"
+          className="bg-WEATHER-neutral-600 hover:bg-WEATHER-neutral-700 text-WEATHER-neutral-200 hover:text-WEATHER-neutral-300 border-WEATHER-neutral-600 cursor-pointer"
           variant="outline"
         >
           {getLongDate(day ?? "")}
@@ -40,7 +40,7 @@ export function DropdownHourlyForecast({
           {data?.map((dayItem) => (
             <DropdownMenuRadioItem
               key={dayItem}
-              className="hover:!bg-WEATHER-neutral-700 hover:!text-WEATHER-neutral-0 p-2 px-4"
+              className="hover:!bg-WEATHER-neutral-700 hover:!text-WEATHER-neutral-0 cursor-pointer p-2 px-4"
               value={dayItem}
             >
               {getLongDate(dayItem)}

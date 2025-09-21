@@ -11,7 +11,7 @@ const Navigation = () => {
       <div className="relative">
         <button
           onClick={() => setDropdownOpen(!isDropdownOpen)}
-          className="bg-WEATHER-neutral-800 hover:bg-WEATHER-neutral-700 flex cursor-pointer items-center justify-between gap-2 rounded-md p-2 px-4"
+          className="bg-WEATHER-neutral-800 hover:bg-WEATHER-neutral-700 flex cursor-pointer items-center justify-between gap-2 rounded-md p-2 px-4 transition-colors ease-in-out"
         >
           <img
             src="/public/images/icon-units.svg"

@@ -80,7 +80,7 @@ const SearchBar = () => {
         </div>
 
         {/* search button */}
-        <button className="bg-WEATHER-blue-500 text-WEATHER-neutral-200 rounded-lg px-5">
+        <button className="bg-WEATHER-blue-500 hover:bg-WEATHER-blue-700 text-WEATHER-neutral-200 cursor-pointer rounded-lg px-5 transition-colors ease-in-out">
           Search
         </button>
       </div>
