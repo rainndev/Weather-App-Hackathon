@@ -5,8 +5,8 @@ import { getWeatherIcon } from "../../utils/weatherIcon";
 import LoadingUI from "../ui/loading";
 
 const LeftDataContainer = () => {
-  const { locationResult, isLoading, weatherData } = useWeatherData();
-
+  const { locationResult, isLoading, weatherData, isCityUsed } =
+    useWeatherData();
   const mockupDailyList = [...Array(7)];
   const currentTemp = +(weatherData?.current?.temperature_2m ?? 0);
   const currentDate = weatherData?.current?.time;
@@ -35,7 +35,9 @@ const LeftDataContainer = () => {
         {!isLoading && (
           <div className="absolute top-0 left-0 flex h-full w-full items-center justify-between p-6">
             <div>
-              <h2 className="text-2xl font-semibold">{currentPHlocation}</h2>
+              <h2 className="text-2xl font-semibold">
+                {isCityUsed ? currentPHlocation : "Current Location"}
+              </h2>
               <p className="text-WEATHER-neutral-200 text-md mt-1">
                 {formatDate(String(currentDate))}
               </p>

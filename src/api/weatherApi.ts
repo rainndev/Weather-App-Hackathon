@@ -4,7 +4,6 @@ import axios from "axios";
 
 const API_BASE_URL = "https://api.open-meteo.com/v1/forecast";
 const API_LOCATION_BASE_URL = "https://geocoding-api.open-meteo.com/v1";
-// https://geocoding-api.open-meteo.com/v1/search?name=Arayat
 
 export type temperatureType = "fahrenheit" | "celsius";
 

@@ -5,9 +5,9 @@ import WeatherDataMain from "@/components/WeatherMain/WeatherDataMain";
 import { useWeatherData } from "@/hooks/useWeatherData";
 
 const App = () => {
-  const { isError, isHourlyDataDate } = useWeatherData();
+  const { isError } = useWeatherData();
 
-  if (isError || isHourlyDataDate) {
+  if (isError) {
     return <ErrorResponseUI />;
   }
   return (
