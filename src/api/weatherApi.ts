@@ -25,6 +25,7 @@ export const fetchWeather = async (
       },
     });
 
+    console.log("data", response.data);
     return response.data;
   } catch (error) {
     console.error("Error fetching weather data:", error);

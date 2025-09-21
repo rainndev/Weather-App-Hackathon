@@ -7,7 +7,6 @@ import { useGeolocation } from "@/hooks/useGeolocation";
 export const useWeatherData = () => {
   const { locationResult, city } = useSearchCity();
   const { isLoadingLocation } = useWeatherLocation(city);
-
   const { latitude, longitude, error: geoError } = useGeolocation();
 
   const latitudeToUse = locationResult?.latitude || latitude;
@@ -35,6 +34,8 @@ export const useWeatherData = () => {
     staleTime: 300000,
   });
 
+  const isWeatherUndefined = typeof weatherData === "undefined";
+
   return {
     locationResult,
     weatherData,
@@ -43,5 +44,6 @@ export const useWeatherData = () => {
     isError,
     isLoadingLocation,
     isCityUsed,
+    isWeatherUndefined,
   };
 };

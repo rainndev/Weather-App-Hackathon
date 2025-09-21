@@ -8,7 +8,7 @@ import { AnimatePresence, motion } from "motion/react";
 const mockHourlyData = [...Array(9)];
 
 const RightDataContainer = () => {
-  const { isLoading, weatherData } = useWeatherData();
+  const { isLoading, weatherData, isWeatherUndefined } = useWeatherData();
   const [day, setDay] = useState<string | undefined>();
 
   useEffect(() => {
@@ -42,7 +42,7 @@ const RightDataContainer = () => {
 
       {/* hourly data  */}
       <div className="mt-4 space-y-3">
-        {isLoading ? (
+        {isLoading || isWeatherUndefined ? (
           mockHourlyData.map((_, i) => (
             <div
               key={i}

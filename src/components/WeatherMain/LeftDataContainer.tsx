@@ -5,8 +5,13 @@ import { getWeatherIcon } from "../../utils/weatherIcon";
 import LoadingUI from "../ui/loading";
 
 const LeftDataContainer = () => {
-  const { locationResult, isLoading, weatherData, isCityUsed } =
-    useWeatherData();
+  const {
+    locationResult,
+    isLoading,
+    weatherData,
+    isCityUsed,
+    isWeatherUndefined,
+  } = useWeatherData();
   const mockupDailyList = [...Array(7)];
   const currentTemp = +(weatherData?.current?.temperature_2m ?? 0);
   const currentDate = weatherData?.current?.time;
@@ -39,7 +44,7 @@ const LeftDataContainer = () => {
                 {isCityUsed ? currentPHlocation : "Current Location"}
               </h2>
               <p className="text-WEATHER-neutral-200 text-md mt-1">
-                {formatDate(String(currentDate))}
+                {!isWeatherUndefined ? formatDate(String(currentDate)) : "N/A"}
               </p>
             </div>
 
@@ -51,7 +56,10 @@ const LeftDataContainer = () => {
               />
 
               <h1 className="text-8xl font-semibold italic">
-                {weatherData?.current?.temperature_2m}°
+                {!isWeatherUndefined
+                  ? weatherData?.current?.temperature_2m
+                  : "0"}
+                °
               </h1>
             </div>
           </div>
@@ -61,51 +69,59 @@ const LeftDataContainer = () => {
       <div className="mt-5 flex w-full gap-5">
         {/* Feels like */}
         <div
-          className={`bg-WEATHER-neutral-800 flex w-full flex-col rounded-xl p-5 ${isLoading && "animate-pulse"}`}
+          className={`bg-WEATHER-neutral-800 flex w-full flex-col rounded-xl p-5 ${(isLoading || isWeatherUndefined) && "animate-pulse"}`}
         >
           <p className="text-WEATHER-neutral-200">Feels Like</p>
           <h1 className="mt-3 text-3xl">
             <p>
-              {!isLoading
-                ? weatherData?.current?.apparent_temperature + "°"
-                : "-"}
+              {(!isLoading &&
+                !isWeatherUndefined &&
+                weatherData?.current?.apparent_temperature.toFixed(0) + "°") ||
+                "-"}
             </p>
           </h1>
         </div>
         {/* Humidity */}
         <div
-          className={`bg-WEATHER-neutral-800 flex w-full flex-col rounded-xl p-5 ${isLoading && "animate-pulse"}`}
+          className={`bg-WEATHER-neutral-800 flex w-full flex-col rounded-xl p-5 ${(isLoading || isWeatherUndefined) && "animate-pulse"}`}
         >
           <p className="text-WEATHER-neutral-200">Humidity</p>
           <h1 className="mt-3 text-3xl">
             <p>
-              {!isLoading
-                ? weatherData?.current?.relative_humidity_2m + "%"
-                : "-"}
+              {(!isLoading &&
+                !isWeatherUndefined &&
+                weatherData?.current?.relative_humidity_2m.toFixed(0) + "%") ||
+                "-"}
             </p>
           </h1>
         </div>
 
         {/* Wind */}
         <div
-          className={`bg-WEATHER-neutral-800 ${isLoading && "animate-pulse"} flex w-full flex-col rounded-xl p-5`}
+          className={`bg-WEATHER-neutral-800 ${(isLoading || isWeatherUndefined) && "animate-pulse"} flex w-full flex-col rounded-xl p-5`}
         >
           <p className="text-WEATHER-neutral-200">Wind</p>
           <h1 className="mt-3 text-3xl">
             <p>
-              {!isLoading ? weatherData?.current?.wind_speed_10m + "km/h" : "-"}
+              {(!isLoading &&
+                !isWeatherUndefined &&
+                weatherData?.current?.wind_speed_10m.toFixed(0) + " km/h") ||
+                "-"}
             </p>
           </h1>
         </div>
 
-        {/* Wind */}
+        {/* Precipitation */}
         <div
-          className={`bg-WEATHER-neutral-800 ${isLoading && "animate-pulse"} flex w-full flex-col rounded-xl p-5`}
+          className={`bg-WEATHER-neutral-800 ${(isLoading || isWeatherUndefined) && "animate-pulse"} flex w-full flex-col rounded-xl p-5`}
         >
           <p className="text-WEATHER-neutral-200">Precipitation</p>
           <h1 className="mt-3 text-3xl">
             <p>
-              {!isLoading ? weatherData?.current?.precipitation + "°" : "-"}
+              {(!isLoading &&
+                !isWeatherUndefined &&
+                weatherData?.current?.precipitation + "°") ||
+                "-"}
             </p>
           </h1>
         </div>
@@ -116,7 +132,7 @@ const LeftDataContainer = () => {
         <h1 className="text-md font-medium">Daily forecast</h1>
 
         <div className="mt-4 flex gap-3">
-          {isLoading &&
+          {(isLoading || isWeatherUndefined) &&
             mockupDailyList.map((_, i) => (
               <div
                 key={i}
