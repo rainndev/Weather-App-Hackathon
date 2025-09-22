@@ -42,7 +42,7 @@ const LeftDataContainer = () => {
         {!isLoading && (
           <div className="absolute top-0 left-0 flex h-full w-full items-center justify-between p-6">
             <div>
-              <h2 className="text-2xl font-semibold">
+              <h2 className="text-3xl font-semibold">
                 {isCityUsed ? currentPHlocation : "Current Location"}
               </h2>
               <p className="text-WEATHER-neutral-200 text-md mt-1">
