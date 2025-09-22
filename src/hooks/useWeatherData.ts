@@ -3,11 +3,13 @@ import { useQuery } from "@tanstack/react-query";
 import { useWeatherLocation } from "@/hooks/useWeatherLocation";
 import { useSearchCity } from "@/context/SearchCity";
 import { useGeolocation } from "@/hooks/useGeolocation";
+import { useImperialSwitcher } from "@/context/ImperialSwitcherContext";
 
 export const useWeatherData = () => {
   const { locationResult, city } = useSearchCity();
   const { isLoadingLocation } = useWeatherLocation(city);
   const { latitude, longitude, error: geoError } = useGeolocation();
+  const { isImperial } = useImperialSwitcher();
 
   const latitudeToUse = locationResult?.latitude || latitude;
   const longitudeToUse = locationResult?.longitude || longitude;
@@ -21,12 +23,19 @@ export const useWeatherData = () => {
     error,
     isError,
   } = useQuery({
-    queryKey: ["weather", locationResult?.latitude, locationResult?.longitude],
+    queryKey: [
+      "weather",
+      locationResult?.latitude,
+      locationResult?.longitude,
+      isImperial,
+    ],
     queryFn: () => {
       return fetchWeather(
         latitudeToUse ?? undefined,
         longitudeToUse ?? undefined,
-        "celsius",
+        isImperial ? "fahrenheit" : "celsius",
+        isImperial ? "mph" : "kmh",
+        isImperial ? "inch" : "mm",
       );
     },
     enabled: !!latitudeToUse && !!longitudeToUse,

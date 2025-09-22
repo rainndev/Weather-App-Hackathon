@@ -3,6 +3,7 @@ import { useWeatherData } from "@/hooks/useWeatherData";
 import { formatDate, getDayOfWeek } from "../../utils/date";
 import { getWeatherIcon } from "../../utils/weatherIcon";
 import LoadingUI from "../ui/loading";
+import { useImperialSwitcher } from "@/context/ImperialSwitcherContext";
 
 const LeftDataContainer = () => {
   const {
@@ -12,6 +13,7 @@ const LeftDataContainer = () => {
     isCityUsed,
     isWeatherUndefined,
   } = useWeatherData();
+  const { isImperial } = useImperialSwitcher();
   const mockupDailyList = [...Array(7)];
   const currentTemp = +(weatherData?.current?.temperature_2m ?? 0);
   const currentDate = weatherData?.current?.time;
@@ -57,7 +59,7 @@ const LeftDataContainer = () => {
 
               <h1 className="text-8xl font-semibold italic">
                 {!isWeatherUndefined
-                  ? weatherData?.current?.temperature_2m
+                  ? weatherData?.current?.temperature_2m.toFixed(0)
                   : "0"}
                 °
               </h1>
@@ -105,7 +107,8 @@ const LeftDataContainer = () => {
             <p>
               {(!isLoading &&
                 !isWeatherUndefined &&
-                weatherData?.current?.wind_speed_10m.toFixed(0) + " km/h") ||
+                weatherData?.current?.wind_speed_10m.toFixed(0) +
+                  ` ${isImperial ? "mph" : "km/h"}`) ||
                 "-"}
             </p>
           </h1>
@@ -120,7 +123,8 @@ const LeftDataContainer = () => {
             <p>
               {(!isLoading &&
                 !isWeatherUndefined &&
-                weatherData?.current?.precipitation + "°") ||
+                weatherData?.current?.precipitation +
+                  ` ${isImperial ? "in" : "mm"}`) ||
                 "-"}
             </p>
           </h1>
