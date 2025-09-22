@@ -31,9 +31,9 @@ const RightDataContainer = () => {
     });
 
   return (
-    <div className="bg-WEATHER-neutral-800 scrollbar-hide overflow-y-auto rounded-2xl p-5">
+    <div className="bg-WEATHER-neutral-800 scrollbar-hide h-150 overflow-y-auto rounded-2xl p-3 md:h-full md:p-5">
       {/* header options */}
-      <div className="flex justify-between">
+      <div className="flex items-center justify-between">
         <p className="text-md font-medium">Hourly forecast</p>
         <DropdownHourlyForecast
           data={weatherData?.daily?.time}
@@ -76,7 +76,7 @@ const RightDataContainer = () => {
                   }}
                   exit={{ opacity: 0, y: -2 }}
                   key={`${day}-${data.hourlyTime}-${data.hourlyTemp}`}
-                  className="bg-WEATHER-neutral-700 border-WEATHER-neutral-600 flex w-full items-center justify-between rounded-lg border p-2.5"
+                  className="bg-WEATHER-neutral-700 border-WEATHER-neutral-600 flex w-full items-center justify-between rounded-lg border p-2 md:p-2.5"
                 >
                   <div className="flex items-center gap-2">
                     <img

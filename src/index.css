@@ -162,3 +162,7 @@
 .scrollbar-hide {
   scrollbar-width: none; /* Also hides the scrollbar */
 }
+
+html {
+  @apply bg-WEATHER-neutral-900;
+}

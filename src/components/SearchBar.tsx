@@ -12,12 +12,12 @@ const SearchBar = () => {
   const { locationData, isLoadingLocation } = useWeatherLocation(inputCity);
 
   return (
-    <div className="bg text-WEATHER-neutral-0 mt-5 flex w-full flex-col items-center">
-      <h1 className="font-bricolage text-5xl font-medium">
+    <div className="bg text-WEATHER-neutral-0 flex w-full flex-col items-center">
+      <h1 className="font-bricolage mt-10 text-center text-5xl font-medium">
         How's the sky looking today?
       </h1>
 
-      <div className="mt-12 flex w-full max-w-xl gap-3">
+      <div className="mt-12 flex w-full max-w-xl flex-col gap-3 md:flex-row">
         {/* search bar */}
         <div className="relative w-full">
           <input
@@ -86,7 +86,7 @@ const SearchBar = () => {
         </div>
 
         {/* search button */}
-        <button className="bg-WEATHER-blue-500 hover:bg-WEATHER-blue-700 text-WEATHER-neutral-200 cursor-pointer rounded-lg px-5 transition-colors ease-in-out">
+        <button className="bg-WEATHER-blue-500 hover:bg-WEATHER-blue-700 text-WEATHER-neutral-200 cursor-pointer rounded-lg px-5 py-2 text-base font-medium transition-colors ease-in-out">
           Search
         </button>
       </div>

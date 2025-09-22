@@ -20,7 +20,7 @@ const LeftDataContainer = () => {
   const currentPHlocation = `${locationResult?.name ?? "N/A"}, ${locationResult?.country ?? "N/A"}`;
 
   return (
-    <div className="flex-1 flex-col">
+    <div className="@container flex-1 flex-col">
       {/* banner today summary weather */}
 
       <div className="relative">
@@ -40,8 +40,9 @@ const LeftDataContainer = () => {
         </div>
 
         {!isLoading && (
-          <div className="absolute top-0 left-0 flex h-full w-full items-center justify-between p-6">
-            <div>
+          <div className="absolute top-0 left-0 flex h-full w-full flex-col items-center justify-center p-6 @lg:flex-row @lg:justify-between">
+            {/* current city and date */}
+            <div className="flex flex-col items-center @lg:items-start">
               <h2 className="text-3xl font-semibold">
                 {isCityUsed ? currentPHlocation : "Current Location"}
               </h2>
@@ -50,11 +51,12 @@ const LeftDataContainer = () => {
               </p>
             </div>
 
-            <div className="flex items-center gap-5">
+            {/*icon and current temp */}
+            <div className="mt-10 flex items-center justify-between gap-5 md:mt-0">
               <img
                 src={getWeatherIconFromCode(currentWeatherCode)}
                 alt="icon weather"
-                className="size-25"
+                className="size-20 md:size-25"
               />
 
               <h1 className="text-8xl font-semibold italic">
@@ -68,12 +70,12 @@ const LeftDataContainer = () => {
         )}
       </div>
 
-      <div className="mt-5 flex w-full gap-5">
+      <div className="mt-5 grid w-full grid-cols-[repeat(auto-fit,minmax(100px,1fr))] gap-3">
         {/* Feels like */}
         <div
           className={`bg-WEATHER-neutral-800 flex w-full flex-col rounded-xl p-5 ${(isLoading || isWeatherUndefined) && "animate-pulse"}`}
         >
-          <p className="text-WEATHER-neutral-200">Feels Like</p>
+          <p className="text-WEATHER-neutral-200 text-base">Feels Like</p>
           <h1 className="mt-3 text-3xl">
             <p>
               {(!isLoading &&
@@ -87,7 +89,7 @@ const LeftDataContainer = () => {
         <div
           className={`bg-WEATHER-neutral-800 flex w-full flex-col rounded-xl p-5 ${(isLoading || isWeatherUndefined) && "animate-pulse"}`}
         >
-          <p className="text-WEATHER-neutral-200">Humidity</p>
+          <p className="text-WEATHER-neutral-200 text-base">Humidity</p>
           <h1 className="mt-3 text-3xl">
             <p>
               {(!isLoading &&
@@ -102,7 +104,7 @@ const LeftDataContainer = () => {
         <div
           className={`bg-WEATHER-neutral-800 ${(isLoading || isWeatherUndefined) && "animate-pulse"} flex w-full flex-col rounded-xl p-5`}
         >
-          <p className="text-WEATHER-neutral-200">Wind</p>
+          <p className="text-WEATHER-neutral-200 text-base">Wind</p>
           <h1 className="mt-3 text-3xl">
             <p>
               {(!isLoading &&
@@ -118,7 +120,7 @@ const LeftDataContainer = () => {
         <div
           className={`bg-WEATHER-neutral-800 ${(isLoading || isWeatherUndefined) && "animate-pulse"} flex w-full flex-col rounded-xl p-5`}
         >
-          <p className="text-WEATHER-neutral-200">Precipitation</p>
+          <p className="text-WEATHER-neutral-200 text-base">Precipitation</p>
           <h1 className="mt-3 text-3xl">
             <p>
               {(!isLoading &&
@@ -135,7 +137,7 @@ const LeftDataContainer = () => {
       <div className="mt-10 flex w-full flex-col">
         <h1 className="text-md font-medium">Daily forecast</h1>
 
-        <div className="mt-4 flex gap-3">
+        <div className="mt-4 grid grid-cols-[repeat(auto-fit,minmax(90px,1fr))] gap-3">
           {(isLoading || isWeatherUndefined) &&
             mockupDailyList.map((_, i) => (
               <div
