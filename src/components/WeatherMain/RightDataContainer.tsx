@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { DropdownHourlyForecast } from "./DropdownHourlyForecast";
 import { useWeatherData } from "@/hooks/useWeatherData";
 import { convertTo12HrFormat, getLongDate } from "@/utils/date";
-import { getWeatherIcon } from "@/utils/weatherIcon";
+import { getWeatherIconFromCode } from "@/utils/weatherIcon";
 import { AnimatePresence, motion } from "motion/react";
 
 const mockHourlyData = [...Array(9)];
@@ -22,9 +22,11 @@ const RightDataContainer = () => {
     .map((data) => {
       const originalIndex = weatherData.hourly.time.indexOf(data);
       const hourlyTemp = weatherData.hourly.temperature_2m[originalIndex];
+      const hourlyWeatherCode = weatherData.hourly.weather_code[originalIndex];
       return {
         hourlyTime: data,
         hourlyTemp,
+        hourlyWeatherCode,
       };
     });
 
@@ -50,7 +52,7 @@ const RightDataContainer = () => {
             >
               <div className="flex items-center gap-2">
                 <img
-                  src={getWeatherIcon(22, "celsius")}
+                  src={getWeatherIconFromCode(22)}
                   className="invisible size-10 object-cover"
                   alt=""
                 />
@@ -78,7 +80,7 @@ const RightDataContainer = () => {
                 >
                   <div className="flex items-center gap-2">
                     <img
-                      src={getWeatherIcon(temp, "celsius")}
+                      src={getWeatherIconFromCode(data.hourlyWeatherCode)}
                       className="size-10 object-cover"
                     />
                     <span>{convertTo12HrFormat(data.hourlyTime)}</span>

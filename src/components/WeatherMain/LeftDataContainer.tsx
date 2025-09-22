@@ -1,7 +1,7 @@
 import { useWeatherData } from "@/hooks/useWeatherData";
 
 import { formatDate, getDayOfWeek } from "../../utils/date";
-import { getWeatherIcon } from "../../utils/weatherIcon";
+import { getWeatherIconFromCode } from "../../utils/weatherIcon";
 import LoadingUI from "../ui/loading";
 import { useImperialSwitcher } from "@/context/ImperialSwitcherContext";
 
@@ -15,7 +15,7 @@ const LeftDataContainer = () => {
   } = useWeatherData();
   const { isImperial } = useImperialSwitcher();
   const mockupDailyList = [...Array(7)];
-  const currentTemp = +(weatherData?.current?.temperature_2m ?? 0);
+  const currentWeatherCode = +(weatherData?.current?.weather_code ?? 0);
   const currentDate = weatherData?.current?.time;
   const currentPHlocation = `${locationResult?.name ?? "N/A"}, ${locationResult?.country ?? "N/A"}`;
 
@@ -52,7 +52,7 @@ const LeftDataContainer = () => {
 
             <div className="flex items-center gap-5">
               <img
-                src={getWeatherIcon(currentTemp, "celsius")}
+                src={getWeatherIconFromCode(currentWeatherCode)}
                 alt="icon weather"
                 className="size-25"
               />
@@ -144,7 +144,7 @@ const LeftDataContainer = () => {
               >
                 <p className="text-WEATHER-neutral-200 invisible">Sat</p>
                 <img
-                  src={getWeatherIcon(+32, "fahrenheit")}
+                  src={getWeatherIconFromCode(+32)}
                   className="invisible my-5 size-15"
                   alt=""
                 />
@@ -160,6 +160,7 @@ const LeftDataContainer = () => {
               weatherData?.daily?.temperature_2m_min[i].toFixed(0);
             const maxTemp =
               weatherData?.daily?.temperature_2m_max[i].toFixed(0);
+            const weatherCode = weatherData?.daily?.weather_code[i];
 
             return (
               <div
@@ -168,7 +169,7 @@ const LeftDataContainer = () => {
               >
                 <p className="text-WEATHER-neutral-200">{getDayOfWeek(date)}</p>
                 <img
-                  src={getWeatherIcon(+maxTemp, "fahrenheit")}
+                  src={getWeatherIconFromCode(weatherCode)}
                   className="my-5 size-15"
                   alt=""
                 />

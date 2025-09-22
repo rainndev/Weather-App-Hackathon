@@ -21,13 +21,13 @@ export const fetchWeather = async (
       params: {
         latitude,
         longitude,
-        daily: "temperature_2m_max,temperature_2m_min",
-        hourly: "temperature_2m",
+        daily: "temperature_2m_max,temperature_2m_min,weather_code",
+        hourly: "temperature_2m,weather_code",
         temperature_unit,
         wind_speed_unit,
         precipitation_unit,
         current:
-          "temperature_2m,apparent_temperature,relative_humidity_2m,wind_speed_10m,precipitation",
+          "temperature_2m,apparent_temperature,relative_humidity_2m,wind_speed_10m,precipitation,weather_code",
       },
     });
 

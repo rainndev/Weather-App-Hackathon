@@ -15,6 +15,7 @@ export type CurrentWeather = {
   apparent_temperature: number;
   relative_humidity_2m: number;
   wind_speed_10m: number;
+  weather_code: number;
   precipitation: number;
 };
 
@@ -22,6 +23,7 @@ export type CurrentWeather = {
 export type HourlyForecast = {
   time: number[];
   temperature_2m: number[];
+  weather_code: number[];
 };
 
 // Define the structure of the daily forecast
@@ -29,6 +31,7 @@ export type DailyForecast = {
   time: string[];
   temperature_2m_max: number[];
   temperature_2m_min: number[];
+  weather_code: number[];
 };
 
 // Define the top-level API response type
