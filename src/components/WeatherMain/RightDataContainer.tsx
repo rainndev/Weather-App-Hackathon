@@ -43,7 +43,7 @@ const RightDataContainer = () => {
       </div>
 
       {/* hourly data  */}
-      <div className="mt-4 space-y-3">
+      <div className="scrollbar-hide mt-4 space-y-3 overflow-y-auto">
         {isLoading || isWeatherUndefined ? (
           mockHourlyData.map((_, i) => (
             <div
@@ -76,17 +76,19 @@ const RightDataContainer = () => {
                   }}
                   exit={{ opacity: 0, y: -2 }}
                   key={`${day}-${data.hourlyTime}-${data.hourlyTemp}`}
-                  className="bg-WEATHER-neutral-700 border-WEATHER-neutral-600 flex w-full items-center justify-between rounded-lg border p-2 md:p-2.5"
+                  className="bg-WEATHER-neutral-700 border-WEATHER-neutral-600 flex w-full items-center justify-between rounded-md border p-1 md:rounded-lg md:p-2.5"
                 >
                   <div className="flex items-center gap-2">
                     <img
                       src={getWeatherIconFromCode(data.hourlyWeatherCode)}
-                      className="size-10 object-cover"
+                      className="size-9 object-cover md:size-10"
                     />
-                    <span>{convertTo12HrFormat(data.hourlyTime)}</span>
+                    <span className="text-base">
+                      {convertTo12HrFormat(data.hourlyTime)}
+                    </span>
                   </div>
 
-                  <p className="text-md mr-2">{temp.toFixed(0)} °</p>
+                  <p className="mr-2 text-base">{temp.toFixed(0)} °</p>
                 </motion.div>
               );
             })}

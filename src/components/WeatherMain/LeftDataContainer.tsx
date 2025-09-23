@@ -137,7 +137,7 @@ const LeftDataContainer = () => {
       <div className="mt-10 flex w-full flex-col">
         <h1 className="text-md font-medium">Daily forecast</h1>
 
-        <div className="mt-4 grid grid-cols-[repeat(auto-fit,minmax(90px,1fr))] gap-3">
+        <div className="mt-4 grid grid-cols-[repeat(auto-fit,minmax(85px,1fr))] gap-3">
           {(isLoading || isWeatherUndefined) &&
             mockupDailyList.map((_, i) => (
               <div
@@ -169,13 +169,15 @@ const LeftDataContainer = () => {
                 key={i}
                 className="bg-WEATHER-neutral-800 flex w-full flex-col items-center rounded-xl p-3"
               >
-                <p className="text-WEATHER-neutral-200">{getDayOfWeek(date)}</p>
+                <p className="text-WEATHER-neutral-200 text-base">
+                  {getDayOfWeek(date)}
+                </p>
                 <img
                   src={getWeatherIconFromCode(weatherCode)}
-                  className="my-5 size-15"
+                  className="my-5 size-12 md:size-15"
                   alt=""
                 />
-                <div className="flex w-full justify-between">
+                <div className="flex w-full justify-between text-base">
                   <p>{minTemp}°</p>
                   <p>{maxTemp}°</p>
                 </div>
