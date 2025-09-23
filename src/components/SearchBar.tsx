@@ -67,14 +67,14 @@ const SearchBar = () => {
                         setSelected(false);
                         console.log("location res ", location);
                       }}
-                      className={`flex ${locationResult?.id === location.id && "bg-WEATHER-neutral-700 border-WEATHER-neutral-600 border"} hover:bg-WEATHER-neutral-700 rounded-lg p-2`}
+                      className={`flex ${locationResult?.id === location.id && "bg-WEATHER-neutral-700 border-WEATHER-neutral-600 border"} hover:bg-WEATHER-neutral-700 items-center rounded-lg p-2`}
                     >
                       <p className="text-sm">
                         {location.name}, {location.admin1}
                       </p>
 
                       {location.country && (
-                        <span className="bg-WEATHER-neutral-600 text-WEATHER-neutral-300 ml-2 flex items-center justify-center rounded-sm px-3 text-xs">
+                        <span className="bg-WEATHER-neutral-600 text-WEATHER-neutral-300 ml-2 flex h-fit items-center justify-center rounded-sm p-1 px-3 text-xs">
                           {location.country}
                         </span>
                       )}

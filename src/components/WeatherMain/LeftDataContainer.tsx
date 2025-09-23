@@ -4,6 +4,7 @@ import { formatDate, getDayOfWeek } from "../../utils/date";
 import { getWeatherIconFromCode } from "../../utils/weatherIcon";
 import LoadingUI from "../ui/loading";
 import { useImperialSwitcher } from "@/context/ImperialSwitcherContext";
+import { motion } from "motion/react";
 
 const LeftDataContainer = () => {
   const {
@@ -138,6 +139,7 @@ const LeftDataContainer = () => {
         <h1 className="text-md font-medium">Daily forecast</h1>
 
         <div className="mt-4 grid grid-cols-[repeat(auto-fit,minmax(85px,1fr))] gap-3">
+          {/* mockup daily forecast */}
           {(isLoading || isWeatherUndefined) &&
             mockupDailyList.map((_, i) => (
               <div
@@ -157,6 +159,7 @@ const LeftDataContainer = () => {
               </div>
             ))}
 
+          {/* real data daily forecast */}
           {weatherData?.daily?.time?.map((date, i) => {
             const minTemp =
               weatherData?.daily?.temperature_2m_min[i].toFixed(0);
@@ -166,13 +169,22 @@ const LeftDataContainer = () => {
 
             return (
               <div
-                key={i}
+                key={date}
                 className="bg-WEATHER-neutral-800 flex w-full flex-col items-center rounded-xl p-3"
               >
                 <p className="text-WEATHER-neutral-200 text-base">
                   {getDayOfWeek(date)}
                 </p>
-                <img
+                <motion.img
+                  initial={{
+                    scale: 0.6,
+                  }}
+                  animate={{
+                    scale: 1,
+                  }}
+                  exit={{
+                    scale: 0.6,
+                  }}
                   src={getWeatherIconFromCode(weatherCode)}
                   className="my-5 size-12 md:size-15"
                   alt=""
