@@ -69,7 +69,7 @@ const SearchBar = () => {
                       }}
                       className={`flex ${locationResult?.id === location.id && "bg-WEATHER-neutral-700 border-WEATHER-neutral-600 border"} hover:bg-WEATHER-neutral-700 rounded-lg p-2`}
                     >
-                      <p>
+                      <p className="text-sm">
                         {location.name}, {location.admin1}
                       </p>
 
