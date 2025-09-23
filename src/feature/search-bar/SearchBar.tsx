@@ -3,12 +3,13 @@ import { useWeatherLocation } from "@/hooks/useWeatherLocation";
 import type { LocationResult } from "@/types/weather-location.types";
 import { AnimatePresence, motion } from "motion/react";
 import { useState } from "react";
+import Loading from "@/feature/search-bar/components/Loading";
+import ItemResult from "./components/ItemResult";
 
 const SearchBar = () => {
   const { locationResult, setLocationResult } = useSearchCity();
   const [inputCity, setInputCity] = useState("");
   const [isSelected, setSelected] = useState(false);
-
   const { locationData, isLoadingLocation } = useWeatherLocation(inputCity);
 
   return (
@@ -38,16 +39,7 @@ const SearchBar = () => {
 
           <AnimatePresence>
             {/* Loading */}
-            {isLoadingLocation && (
-              <div className="bg-WEATHER-neutral-800 border-WEATHER-neutral-700 absolute z-20 mt-2 flex h-fit w-full cursor-pointer items-center gap-3 rounded-lg border p-3 shadow-2xl">
-                <img
-                  src="/public/images/icon-loading.svg"
-                  alt="loading"
-                  className="animate-spin object-cover"
-                />
-                <p className="text-sm">Search in progress</p>
-              </div>
-            )}
+            {isLoadingLocation && <Loading />}
 
             {/* Result  */}
             {(locationData?.results?.length ?? 0) > 0 &&
@@ -60,25 +52,15 @@ const SearchBar = () => {
                   className="bg-WEATHER-neutral-800 border-WEATHER-neutral-700 absolute z-20 mt-2 h-fit w-full cursor-pointer space-y-1 rounded-lg border p-2 shadow-2xl"
                 >
                   {locationData?.results.map((location: LocationResult) => (
-                    <div
-                      key={location.id}
-                      onClick={() => {
+                    <ItemResult
+                      locationItem={location}
+                      locationResult={locationResult}
+                      onClickItem={() => {
                         setLocationResult(location);
                         setSelected(false);
                         console.log("location res ", location);
                       }}
-                      className={`flex ${locationResult?.id === location.id && "bg-WEATHER-neutral-700 border-WEATHER-neutral-600 border"} hover:bg-WEATHER-neutral-700 items-center rounded-lg p-2`}
-                    >
-                      <p className="text-sm">
-                        {location.name}, {location.admin1}
-                      </p>
-
-                      {location.country && (
-                        <span className="bg-WEATHER-neutral-600 text-WEATHER-neutral-300 ml-2 flex h-fit items-center justify-center rounded-sm p-1 px-3 text-xs">
-                          {location.country}
-                        </span>
-                      )}
-                    </div>
+                    />
                   ))}
                 </motion.div>
               )}

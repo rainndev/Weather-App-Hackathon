@@ -1,12 +1,11 @@
 import { useWeatherData } from "@/hooks/useWeatherData";
 
-import { formatDate, getDayOfWeek } from "../../utils/date";
-import { getWeatherIconFromCode } from "../../utils/weatherIcon";
-import LoadingUI from "../ui/loading";
+import { formatDate } from "@/feature/weather/utils/date";
+import { getWeatherIconFromCode } from "@/feature/weather/utils/weather-icon";
+import LoadingUI from "@/components/ui/dot-loading";
 import { useImperialSwitcher } from "@/context/ImperialSwitcherContext";
-import { motion } from "motion/react";
 
-const LeftDataContainer = () => {
+const CurrentWeather = () => {
   const {
     locationResult,
     isLoading,
@@ -15,7 +14,6 @@ const LeftDataContainer = () => {
     isWeatherUndefined,
   } = useWeatherData();
   const { isImperial } = useImperialSwitcher();
-  const mockupDailyList = [...Array(7)];
   const currentWeatherCode = +(weatherData?.current?.weather_code ?? 0);
   const currentDate = weatherData?.current?.time;
   const currentPHlocation = `${locationResult?.name ?? "N/A"}, ${locationResult?.country ?? "N/A"}`;
@@ -133,73 +131,8 @@ const LeftDataContainer = () => {
           </h1>
         </div>
       </div>
-
-      {/* Daily forecast data  */}
-      <div className="mt-10 flex w-full flex-col">
-        <h1 className="text-md font-medium">Daily forecast</h1>
-
-        <div className="mt-4 grid grid-cols-[repeat(auto-fit,minmax(85px,1fr))] gap-3">
-          {/* mockup daily forecast */}
-          {(isLoading || isWeatherUndefined) &&
-            mockupDailyList.map((_, i) => (
-              <div
-                key={i}
-                className="bg-WEATHER-neutral-800 flex w-full animate-pulse flex-col items-center rounded-xl p-3"
-              >
-                <p className="text-WEATHER-neutral-200 invisible">Sat</p>
-                <img
-                  src={getWeatherIconFromCode(+32)}
-                  className="invisible my-5 size-15"
-                  alt=""
-                />
-                <div className="invisible flex w-full justify-between">
-                  <p>25°</p>
-                  <p>32°</p>
-                </div>
-              </div>
-            ))}
-
-          {/* real data daily forecast */}
-          {weatherData?.daily?.time?.map((date, i) => {
-            const minTemp =
-              weatherData?.daily?.temperature_2m_min[i].toFixed(0);
-            const maxTemp =
-              weatherData?.daily?.temperature_2m_max[i].toFixed(0);
-            const weatherCode = weatherData?.daily?.weather_code[i];
-
-            return (
-              <div
-                key={date}
-                className="bg-WEATHER-neutral-800 flex w-full flex-col items-center rounded-xl p-3"
-              >
-                <p className="text-WEATHER-neutral-200 text-base">
-                  {getDayOfWeek(date)}
-                </p>
-                <motion.img
-                  initial={{
-                    scale: 0.6,
-                  }}
-                  animate={{
-                    scale: 1,
-                  }}
-                  exit={{
-                    scale: 0.6,
-                  }}
-                  src={getWeatherIconFromCode(weatherCode)}
-                  className="my-5 size-12 md:size-15"
-                  alt=""
-                />
-                <div className="flex w-full justify-between text-base">
-                  <p>{minTemp}°</p>
-                  <p>{maxTemp}°</p>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </div>
     </div>
   );
 };
 
-export default LeftDataContainer;
+export default CurrentWeather;

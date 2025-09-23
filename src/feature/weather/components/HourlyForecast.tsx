@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
-import { DropdownHourlyForecast } from "./DropdownHourlyForecast";
+import { DropdownHourlyForecast } from "@/feature/weather/components/DropdownHourlyForecast";
 import { useWeatherData } from "@/hooks/useWeatherData";
-import { convertTo12HrFormat, getLongDate } from "@/utils/date";
-import { getWeatherIconFromCode } from "@/utils/weatherIcon";
+import { convertTo12HrFormat, getLongDate } from "@/feature/weather/utils/date";
+import { getWeatherIconFromCode } from "@/feature/weather/utils/weather-icon";
 import { AnimatePresence, motion } from "motion/react";
 
 const mockHourlyData = [...Array(9)];
 
-const RightDataContainer = () => {
+const HourlyForecast = () => {
   const { isLoading, weatherData, isWeatherUndefined } = useWeatherData();
   const [day, setDay] = useState<string | undefined>();
 
@@ -99,4 +99,4 @@ const RightDataContainer = () => {
   );
 };
 
-export default RightDataContainer;
+export default HourlyForecast;

@@ -9,7 +9,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-import { getLongDate } from "@/utils/date";
+import { getLongDate } from "@/feature/weather/utils/date";
 
 interface DropdownHourlyForecastProps {
   data: string[] | undefined;

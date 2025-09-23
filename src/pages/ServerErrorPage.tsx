@@ -1,4 +1,4 @@
-const ErrorResponseUI = () => {
+const ServerErrorPage = () => {
   return (
     <div className="text-WEATHER-neutral-0 mt-10 flex min-h-screen w-full flex-col items-center justify-start p-8">
       <img
@@ -25,4 +25,4 @@ const ErrorResponseUI = () => {
   );
 };
 
-export default ErrorResponseUI;
+export default ServerErrorPage;

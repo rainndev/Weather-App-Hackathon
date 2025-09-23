@@ -2,7 +2,7 @@ import { motion } from "motion/react";
 
 const dots = [...Array(3)];
 
-const LoadingUI = () => {
+const DotLoadingAnimation = () => {
   return (
     <div className="flex flex-col items-center justify-center p-4 text-gray-100">
       <div className="flex space-x-2">
@@ -28,4 +28,4 @@ const LoadingUI = () => {
   );
 };
 
-export default LoadingUI;
+export default DotLoadingAnimation;

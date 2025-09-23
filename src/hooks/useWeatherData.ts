@@ -1,4 +1,4 @@
-import { fetchWeather } from "@/api/weatherApi";
+import { fetchWeather } from "@/feature/weather/services/weatherService";
 import { useQuery } from "@tanstack/react-query";
 import { useWeatherLocation } from "@/hooks/useWeatherLocation";
 import { useSearchCity } from "@/context/SearchCity";

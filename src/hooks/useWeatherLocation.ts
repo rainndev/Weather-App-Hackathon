@@ -1,4 +1,4 @@
-import { fetchLocation } from "@/api/weatherApi";
+import { fetchLocation } from "@/feature/weather/services/weatherService";
 import { useQuery } from "@tanstack/react-query";
 
 export const useWeatherLocation = (city: string) => {
