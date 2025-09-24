@@ -56,6 +56,7 @@ const SearchBar = () => {
                 >
                   {locationData?.results.map((location: LocationResult) => (
                     <ItemResult
+                      key={location.id}
                       locationItem={location}
                       locationResult={locationResult}
                       isLocationExist={isLocationExist}

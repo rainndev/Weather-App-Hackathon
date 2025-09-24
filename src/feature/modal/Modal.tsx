@@ -3,16 +3,18 @@ import { FaLocationDot } from "react-icons/fa6";
 import { IoClose } from "react-icons/io5";
 import { FaTrash } from "react-icons/fa6";
 import { AnimatePresence, motion } from "motion/react";
+import { useSearchCity } from "@/context/SearchCity";
 
 const Modal = () => {
   const { toggleModal, favoritesLocation, removeFavorite } = useFavorite();
+  const { setLocationResult } = useSearchCity();
   return (
-    <div className="fixed inset-0 z-20 flex justify-center bg-black/50 p-20 backdrop-blur-xs">
+    <div className="fixed inset-0 z-20 flex justify-center bg-black/50 p-4 backdrop-blur-xs sm:p-10 md:p-20">
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: 50 }}
-        className="bg-WEATHER-neutral-800 scrollbar-hide w-full max-w-xl overflow-y-auto rounded-3xl p-7"
+        className="bg-WEATHER-neutral-800 scrollbar-hide w-full max-w-xl overflow-y-auto rounded-xl p-5 shadow-2xl md:rounded-3xl md:p-7"
       >
         <div className="flex justify-between">
           <h1 className="font-bricolage mb-5 text-3xl font-medium">
@@ -25,7 +27,7 @@ const Modal = () => {
 
         <AnimatePresence>
           <div className="space-y-2">
-            {favoritesLocation.map((data, i) => (
+            {favoritesLocation.map((location, i) => (
               <motion.div
                 layout
                 initial={{ opacity: 0, y: 0 }}
@@ -34,25 +36,33 @@ const Modal = () => {
                 transition={{
                   delay: i * 0.01,
                 }}
-                key={data.id}
-                className="bg-WEATHER-neutral-700 flex items-center rounded-lg p-4"
+                key={location.id}
+                className="bg-WEATHER-neutral-700 hover:bg-WEATHER-neutral-800 border-WEATHER-neutral-700 hover:border-WEATHER-neutral-600 flex cursor-pointer items-center rounded-lg border-2 pr-4 transition-colors ease-in-out"
               >
-                <FaLocationDot className="text-WEATHER-neutral-300 mr-2" />
-                <div className="flex w-[90%] items-center">
-                  <p className="text-sm">
-                    {data.name}, {data.admin1}
-                  </p>
+                <div className="flex w-full items-center p-3 md:p-4">
+                  <FaLocationDot className="text-WEATHER-neutral-300 mr-2" />
+                  <div
+                    onClick={() => {
+                      setLocationResult(location);
+                      toggleModal();
+                    }}
+                    className="bg ml-2 flex w-[90%] flex-col items-start md:ml-0 md:flex-row md:items-center"
+                  >
+                    <p className="text-sm">
+                      {location.name}, {location.admin1}
+                    </p>
 
-                  {data.country && (
-                    <span className="bg-WEATHER-neutral-600 text-WEATHER-neutral-300 ml-4 flex h-fit items-center justify-center rounded-sm p-1 px-3 text-xs">
-                      {data.country}
-                    </span>
-                  )}
+                    {location.country && (
+                      <span className="bg-WEATHER-neutral-600 text-WEATHER-neutral-300 mt-1 flex h-fit items-center justify-center rounded-sm p-1 px-3 text-center text-xs transition-colors ease-in-out md:mt-0 md:ml-4">
+                        {location.country}
+                      </span>
+                    )}
+                  </div>
                 </div>
 
                 <div
                   className="cursor-pointer"
-                  onClick={() => removeFavorite(data.id)}
+                  onClick={() => removeFavorite(location.id)}
                 >
                   <FaTrash className="text-WEATHER-neutral-300" />
                 </div>
