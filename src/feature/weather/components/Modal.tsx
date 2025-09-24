@@ -14,7 +14,7 @@ const Modal = () => {
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: 50 }}
-        className="bg-WEATHER-neutral-800 scrollbar-hide max-h-[80%] w-full max-w-xl overflow-y-auto rounded-xl p-5 shadow-2xl md:max-h-[85%] md:rounded-3xl md:p-7"
+        className="bg-WEATHER-neutral-800 scrollbar-hide h-[80%] w-full max-w-xl overflow-y-auto rounded-xl p-5 shadow-2xl md:max-h-[85%] md:rounded-3xl md:p-7"
       >
         <div className="flex justify-between">
           <h1 className="font-bricolage mb-5 text-3xl font-medium">
