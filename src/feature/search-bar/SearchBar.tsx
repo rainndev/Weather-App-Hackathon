@@ -13,7 +13,7 @@ const SearchBar = () => {
   const [inputCity, setInputCity] = useState("");
   const [isSelected, setSelected] = useState(false);
   const { locationData, isLoadingLocation } = useWeatherLocation(inputCity);
-  const { toggleModal, addFavorite } = useFavorite();
+  const { toggleModal, addFavorite, isLocationExist } = useFavorite();
 
   return (
     <div className="bg text-WEATHER-neutral-0 flex w-full flex-col items-center">
@@ -58,6 +58,7 @@ const SearchBar = () => {
                     <ItemResult
                       locationItem={location}
                       locationResult={locationResult}
+                      isLocationExist={isLocationExist}
                       onClickItem={() => {
                         setLocationResult(location);
                         setSelected(false);

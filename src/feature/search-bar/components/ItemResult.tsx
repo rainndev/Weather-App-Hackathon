@@ -1,10 +1,11 @@
 import type { LocationResult } from "@/types/weather-location.types";
 import { FaRegBookmark } from "react-icons/fa6";
-// import { FaBookmark } from "react-icons/fa6";
+import { FaBookmark } from "react-icons/fa6";
 
 interface ItemResultProps {
   onClickItem: () => void;
   onClickFavorite: () => void;
+  isLocationExist: (id: number) => boolean;
   locationItem: LocationResult;
   locationResult: LocationResult | undefined;
 }
@@ -13,6 +14,7 @@ const ItemResult = ({
   onClickItem,
   onClickFavorite,
   locationResult,
+  isLocationExist,
   locationItem,
 }: ItemResultProps) => {
   return (
@@ -33,7 +35,11 @@ const ItemResult = ({
       </div>
 
       <div onClick={onClickFavorite} className="p-1.5">
-        <FaRegBookmark className="text-WEATHER-neutral-300 size-3.5" />
+        {isLocationExist(locationItem.id) ? (
+          <FaBookmark className="text-WEATHER-neutral-300 size-3.5" />
+        ) : (
+          <FaRegBookmark className="text-WEATHER-neutral-300 size-3.5" />
+        )}
       </div>
     </div>
   );

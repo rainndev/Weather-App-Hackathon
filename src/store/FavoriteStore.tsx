@@ -5,6 +5,7 @@ import { persist } from "zustand/middleware";
 interface FavoriteStoreType {
   isShowing: boolean;
   toggleModal: () => void;
+  isLocationExist: (id: number) => boolean;
   favoritesLocation: LocationResult[];
   addFavorite: (location: LocationResult) => void;
   removeFavorite: (id: number) => void;
@@ -12,13 +13,16 @@ interface FavoriteStoreType {
 
 export const useFavorite = create<FavoriteStoreType>()(
   persist(
-    (set) => ({
+    (set, get) => ({
+      favoritesLocation: [],
       isShowing: false,
       toggleModal: () => set((state) => ({ isShowing: !state.isShowing })),
-      favoritesLocation: [],
+      isLocationExist: (id) => {
+        return get().favoritesLocation.some((data) => data.id === id);
+      },
       addFavorite: (location) =>
         set((state) => {
-          if (state.favoritesLocation.includes(location)) {
+          if (state.favoritesLocation.some((data) => data.id === location.id)) {
             return {
               favoritesLocation: state.favoritesLocation,
             };
