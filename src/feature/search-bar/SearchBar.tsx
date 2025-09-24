@@ -5,12 +5,15 @@ import { AnimatePresence, motion } from "motion/react";
 import { useState } from "react";
 import Loading from "@/feature/search-bar/components/Loading";
 import ItemResult from "./components/ItemResult";
+import { FaRegBookmark } from "react-icons/fa6";
+import { useFavorite } from "@/store/FavoriteStore";
 
 const SearchBar = () => {
   const { locationResult, setLocationResult } = useSearchCity();
   const [inputCity, setInputCity] = useState("");
   const [isSelected, setSelected] = useState(false);
   const { locationData, isLoadingLocation } = useWeatherLocation(inputCity);
+  const { toggleModal, addFavorite } = useFavorite();
 
   return (
     <div className="bg text-WEATHER-neutral-0 flex w-full flex-col items-center">
@@ -60,6 +63,7 @@ const SearchBar = () => {
                         setSelected(false);
                         console.log("location res ", location);
                       }}
+                      onClickFavorite={() => addFavorite(location)}
                     />
                   ))}
                 </motion.div>
@@ -67,10 +71,21 @@ const SearchBar = () => {
           </AnimatePresence>
         </div>
 
-        {/* search button */}
-        <button className="bg-WEATHER-blue-500 hover:bg-WEATHER-blue-700 text-WEATHER-neutral-200 cursor-pointer rounded-lg px-5 py-2 text-base font-medium transition-colors ease-in-out">
-          Search
-        </button>
+        <div className="flex">
+          {/* search button */}
+          <button className="bg-WEATHER-blue-500 hover:bg-WEATHER-blue-700 text-WEATHER-neutral-200 z-5 w-full cursor-pointer rounded-lg px-5 py-2 text-base font-medium transition-colors ease-in-out">
+            Search
+          </button>
+
+          {/* bookmark button */}
+          <div
+            onClick={toggleModal}
+            className="bg-WEATHER-neutral-800 hover:bg-WEATHER-neutral-600 text-WEATHER-neutral-200 flex h-full w-fit -translate-x-1.5 cursor-pointer items-center justify-center gap-2 rounded-tr-lg rounded-br-lg px-4 py-2"
+          >
+            <p className="invisible w-0">&nbsp;</p>
+            <FaRegBookmark className="size-4" />
+          </div>
+        </div>
       </div>
     </div>
   );
