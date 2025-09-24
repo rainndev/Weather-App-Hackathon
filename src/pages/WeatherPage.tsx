@@ -1,4 +1,4 @@
-import Modal from "@/feature/modal/Modal";
+import Modal from "@/feature/weather/components/Modal";
 import CurrentWeather from "@/feature/weather/components/CurrentWeather";
 import DailyForecast from "@/feature/weather/components/DailyForecast";
 import HourlyForecast from "@/feature/weather/components/HourlyForecast";
