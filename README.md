@@ -41,8 +41,15 @@ Users should be able to:
 - See hover and focus states for all interactive elements on the page
 
 ### Screenshot
+<img width="400" alt="Screenshot 2025-09-24 202954" src="https://github.com/user-attachments/assets/21a71d4c-c574-42e2-9ac5-f174fe9b72fa" />
+<img width="400" alt="Screenshot 2025-09-24 202932" src="https://github.com/user-attachments/assets/acb91901-9530-4d80-9d06-12ecb2515f52" />
+<img width="400" alt="Screenshot 2025-09-24 202912" src="https://github.com/user-attachments/assets/720536b3-ec30-44fb-b5d0-d80907e12e7b" />
+<img width="200" alt="Screenshot 2025-09-24 202857" src="https://github.com/user-attachments/assets/00bc447a-82ae-47b8-bdd8-8aab0f904553" />
+<img width="200" alt="Screenshot 2025-09-24 202844" src="https://github.com/user-attachments/assets/04114d35-f0b0-49e8-802c-fda7a403c49b" />
+<img width="200" alt="Screenshot 2025-09-17 224707" src="https://github.com/user-attachments/assets/77885ee6-e550-4b9f-9055-067bbf1845c6" />
 
-![Weather App Screenshot](./screenshot.jpg)
+
+
 
 ---
 
