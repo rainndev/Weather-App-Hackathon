@@ -9,12 +9,12 @@ const Modal = () => {
   const { toggleModal, favoritesLocation, removeFavorite } = useFavorite();
   const { setLocationResult } = useSearchCity();
   return (
-    <div className="fixed inset-0 z-20 flex justify-center bg-black/50 p-4 backdrop-blur-xs sm:p-10 md:p-20">
+    <div className="fixed inset-0 z-20 flex items-center justify-center bg-black/50 p-2 backdrop-blur-xs sm:p-10 md:p-20">
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: 50 }}
-        className="bg-WEATHER-neutral-800 scrollbar-hide w-full max-w-xl overflow-y-auto rounded-xl p-5 shadow-2xl md:rounded-3xl md:p-7"
+        className="bg-WEATHER-neutral-800 scrollbar-hide max-h-[80%] w-full max-w-xl overflow-y-auto rounded-xl p-5 shadow-2xl md:max-h-[85%] md:rounded-3xl md:p-7"
       >
         <div className="flex justify-between">
           <h1 className="font-bricolage mb-5 text-3xl font-medium">
@@ -28,7 +28,7 @@ const Modal = () => {
         <AnimatePresence>
           <div className="h-full space-y-2">
             {favoritesLocation.length <= 0 && (
-              <div className="flex h-full items-center justify-center gap-2">
+              <div className="flex h-full items-center justify-center gap-2 py-50">
                 <img src="/images/icon-error.svg" className="size-5" alt="" />
                 <p className="text-WEATHER-neutral-300 text-base">
                   No favorite added
