@@ -26,7 +26,7 @@ const CurrentWeather = () => {
         <div className="bg-WEATHER-neutral-800 flex h-80 w-full items-center justify-center overflow-hidden rounded-2xl">
           {!isLoading ? (
             <img
-              src="/public/images/bg-today-large.svg"
+              src="/images/bg-today-large.svg"
               className="h-full w-full object-cover"
               alt="today image bg"
             />

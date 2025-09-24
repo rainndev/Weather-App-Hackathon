@@ -36,7 +36,7 @@ const SearchBar = () => {
           />
 
           <img
-            src="/public/images/icon-search.svg"
+            src="/images/icon-search.svg"
             className="absolute top-1/2 left-3.5 size-4 -translate-y-1/2"
           />
 

@@ -32,7 +32,7 @@ export function DropdownHourlyForecast({
           variant="outline"
         >
           {getLongDate(day ?? "")}
-          <img src="/public/images/icon-dropdown.svg" className="size-3" />
+          <img src="/images/icon-dropdown.svg" className="size-3" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="bg-WEATHER-neutral-800 text-WEATHER-neutral-0 border-WEATHER-neutral-600 w-fit border">
