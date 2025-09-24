@@ -12,7 +12,7 @@ const DailyForecast = () => {
     <div className="mt-10 flex w-full flex-col">
       <h1 className="text-md font-medium">Daily forecast</h1>
 
-      <div className="mt-4 grid grid-cols-[repeat(auto-fit,minmax(100px,1fr))] gap-3">
+      <div className="mt-4 grid grid-cols-[repeat(auto-fit,minmax(85px,1fr))] gap-3">
         {/* mockup daily forecast */}
         {(isLoading || isWeatherUndefined) &&
           mockupDailyList.map((_, i) => (

@@ -69,7 +69,7 @@ const CurrentWeather = () => {
         )}
       </div>
 
-      <div className="mt-5 grid w-full grid-cols-[repeat(auto-fit,minmax(100px,1fr))] gap-3">
+      <div className="mt-5 grid w-full grid-cols-2 gap-3 @sm:grid-cols-3 @md:grid-cols-4">
         {/* Feels like */}
         <div
           className={`bg-WEATHER-neutral-800 flex w-full flex-col rounded-xl p-5 ${(isLoading || isWeatherUndefined) && "animate-pulse"}`}
