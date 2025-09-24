@@ -29,11 +29,7 @@ const Modal = () => {
           <div className="h-full space-y-2">
             {favoritesLocation.length <= 0 && (
               <div className="flex h-full items-center justify-center gap-2">
-                <img
-                  src="/public/images/icon-error.svg"
-                  className="size-5"
-                  alt=""
-                />
+                <img src="/images/icon-error.svg" className="size-5" alt="" />
                 <p className="text-WEATHER-neutral-300 text-base">
                   No favorite added
                 </p>
